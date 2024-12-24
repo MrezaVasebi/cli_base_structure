@@ -1,0 +1,13 @@
+{
+  "migIndex": 1,
+  "data": [
+    {
+      "path": "src/assets/fonts/Ubuntu-Medium.ttf",
+      "sha1": "da662f767e6261491e20da197bd7ffbb7a7d122c"
+    },
+    {
+      "path": "src/assets/fonts/YEKAN_BAKH_FANUM_05_MEDIUM.ttf",
+      "sha1": "5d14aab2a2a4041a531ae26b48b09bfeff258968"
+    }
+  ]
+}
