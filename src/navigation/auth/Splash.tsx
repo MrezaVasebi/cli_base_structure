@@ -1,11 +1,15 @@
+import { IconButton, SimpleButton } from "../../components/buttons";
+import { storage } from "../../modules/storage.ts";
 import { ROUTES, SplashProps } from "../../routes";
 
 import React from "react";
 import { useTranslation } from "react-i18next";
 import { StyleSheet } from "react-native";
-import { SimpleButton } from "../../components/buttons";
 import { RootView } from "../../components/others";
 import { AppText } from "../../components/texts";
+import { useAppConfig } from "../../context/AppConfigContext.tsx";
+import { appColors } from "../../utils/appColors.ts";
+import { STORAGE_KEY } from "../../utils/constants.ts";
 
 // import {StackNavigationProp} from '@react-navigation/stack';
 
@@ -14,10 +18,42 @@ import { AppText } from "../../components/texts";
 const Splash = (props: SplashProps) => {
   // const navigation: NavigationProp<ParamListBase> = useNavigation<SplashProp>();
 
-  const { t } = useTranslation();
+  const { theme, setTheme } = useAppConfig();
+  const { i18n } = useTranslation();
 
   return (
-    <RootView bodyStyle={styles.rootStyle}>
+    <RootView
+      bodyStyle={{
+        ...styles.rootStyle,
+        backgroundColor: theme === "light" ? appColors.black : appColors.white,
+      }}
+    >
+      <IconButton
+        style={styles.langStyle}
+        onPress={async () => {
+          i18n.changeLanguage(i18n.language === "fa" ? "en" : "fa");
+          await storage().storeData(
+            i18n.language === "fa" ? "fa" : "en",
+            STORAGE_KEY.lang_key
+          );
+        }}
+        iconName="language"
+        iconSize={25}
+      />
+
+      <IconButton
+        style={{ ...styles.langStyle, left: 70 }}
+        onPress={async () => {
+          setTheme(theme === "light" ? "dark" : "light");
+          await storage().storeData(
+            theme === "light" ? "light" : "dark",
+            STORAGE_KEY.theme_key
+          );
+        }}
+        iconName={"theme-light-dark"}
+        iconSize={25}
+      />
+
       <AppText lbl={"appDescription"} style={styles.descStyle} />
 
       <SimpleButton
@@ -38,12 +74,15 @@ export default Splash;
 const styles = StyleSheet.create({
   rootStyle: {
     padding: 20,
-    alignItems: "center",
     justifyContent: "center",
   },
   descStyle: {
-    fontSize: 15,
+    fontSize: 14,
     lineHeight: 25,
-    textAlign: "justify",
+  },
+  langStyle: {
+    top: 20,
+    left: 20,
+    position: "absolute",
   },
 });

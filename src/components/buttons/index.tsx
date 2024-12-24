@@ -1,4 +1,5 @@
-import ButtonWrapper from './ButtonWrapper';
-import SimpleButton from './SimpleButton';
+import ButtonWrapper from "./ButtonWrapper";
+import IconButton from "./IconButton";
+import SimpleButton from "./SimpleButton";
 
-export {ButtonWrapper, SimpleButton};
+export { ButtonWrapper, IconButton, SimpleButton };

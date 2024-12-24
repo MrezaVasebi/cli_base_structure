@@ -1,8 +1,6 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { DEV_MODE } from "../utils/constants";
 
-export const languageKey = "lang_key";
-
 export const storage = <T>() => {
   return {
     storeData: async (v: T, key: string) => {

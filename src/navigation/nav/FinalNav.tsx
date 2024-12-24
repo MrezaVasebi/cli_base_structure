@@ -1,19 +1,19 @@
 import { ROUTES, RootStackParams } from "../../routes";
 
-import Content from "../Content";
 import { NavigationContainer } from "@react-navigation/native";
-import NoNetwork from "../../components/others/NoNetwork";
-import React from "react";
-import { Splash } from "../auth";
 import { createStackNavigator } from "@react-navigation/stack";
-import { useNetwork } from "../../context";
+import React from "react";
+import NoNetwork from "../../components/others/NoNetwork";
+import { useAppConfig } from "../../context";
+import { Splash } from "../auth";
+import Content from "../Content";
 
 const Stack = createStackNavigator<RootStackParams>();
 
 function FinalNav() {
-  const { isconnected } = useNetwork();
+  const { hasNetwork } = useAppConfig();
 
-  if (!isconnected) return <NoNetwork status={isconnected} />;
+  if (!hasNetwork) return <NoNetwork status={hasNetwork} />;
 
   return (
     <NavigationContainer>
