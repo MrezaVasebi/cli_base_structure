@@ -1,18 +1,26 @@
-import { TouchableOpacityProps } from "react-native";
+import { StyleSheet, TouchableOpacityProps } from "react-native";
 
 import React from "react";
 import { ButtonWrapper } from ".";
+import { appColors } from "../../utils";
 import AppIcon from "../others/AppIcon";
 
 interface IIconButton {
-  iconName?: string;
-  iconColor?: string;
+  iconName: string;
   iconSize?: number;
+  iconColor?: string;
 }
 
 const IconButton = (props: TouchableOpacityProps & IIconButton) => {
   return (
-    <ButtonWrapper style={[props.style]} onPress={props.onPress}>
+    <ButtonWrapper
+      onPress={props.onPress}
+      style={[
+        styles.rootStyle,
+        { backgroundColor: appColors.transparent },
+        props.style,
+      ]}
+    >
       <AppIcon
         name={props.iconName}
         size={props.iconSize}
@@ -23,3 +31,12 @@ const IconButton = (props: TouchableOpacityProps & IIconButton) => {
 };
 
 export default IconButton;
+
+const styles = StyleSheet.create({
+  rootStyle: {
+    width: 30,
+    height: 30,
+    alignItems: "center",
+    justifyContent: "center",
+  },
+});

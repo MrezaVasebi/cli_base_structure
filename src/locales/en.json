@@ -1,5 +1,9 @@
 {
   "gotToSeeContent": "Go to see content",
   "appDescription": "This app includes most of the common components and libraries which are used in any React-Native application. Also, some common logics such as internet checking, Async-Storage commands, multi languages, Notch problem in IOS and etc have also been implemented.",
-  "content": "Content"
+  "content": "Content",
+  "left": "Left",
+  "right": "Right",
+  "center": "Center",
+  "buttons": "Buttons"
 }

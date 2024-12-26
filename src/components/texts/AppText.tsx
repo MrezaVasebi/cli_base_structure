@@ -7,6 +7,7 @@ import { useAppConfig } from "../../context";
 
 interface IAppText {
   lbl?: string;
+  hasBgColor?: boolean;
 }
 
 const AppText = (props: IAppText & TextProps) => {
@@ -19,7 +20,13 @@ const AppText = (props: IAppText & TextProps) => {
       style={[
         styles.rootStyle,
         {
-          color: theme === "light" ? appColors.white : appColors.black,
+          color: !props.hasBgColor
+            ? theme === "light"
+              ? appColors.white
+              : appColors.dark
+            : theme === "light"
+            ? appColors.blue
+            : appColors.white,
           fontFamily: lang === "fa" ? appFonts.fa : appFonts.en,
           textAlign: lang === "fa" ? "right" : "justify",
         },
@@ -27,7 +34,6 @@ const AppText = (props: IAppText & TextProps) => {
       ]}
       ellipsizeMode={props.lineBreakMode}
       numberOfLines={props.numberOfLines}
-      // {...props}
     >
       {t(props.lbl ?? "")}
     </Text>

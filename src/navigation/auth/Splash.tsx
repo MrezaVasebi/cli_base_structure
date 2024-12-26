@@ -1,5 +1,4 @@
 import { IconButton, SimpleButton } from "../../components/buttons";
-import { storage } from "../../modules/storage.ts";
 import { ROUTES, SplashProps } from "../../routes";
 
 import React from "react";
@@ -7,9 +6,9 @@ import { useTranslation } from "react-i18next";
 import { StyleSheet } from "react-native";
 import { RootView } from "../../components/others";
 import { AppText } from "../../components/texts";
-import { useAppConfig } from "../../context/AppConfigContext.tsx";
-import { appColors } from "../../utils/appColors.ts";
-import { STORAGE_KEY } from "../../utils/constants.ts";
+import { useAppConfig } from "../../context";
+import { storage } from "../../modules/storage.ts";
+import { STORAGE_KEY } from "../../utils";
 
 // import {StackNavigationProp} from '@react-navigation/stack';
 
@@ -25,13 +24,12 @@ const Splash = (props: SplashProps) => {
     <RootView
       bodyStyle={{
         ...styles.rootStyle,
-        backgroundColor: theme === "light" ? appColors.black : appColors.white,
       }}
     >
       <IconButton
         style={styles.langStyle}
         onPress={async () => {
-          i18n.changeLanguage(i18n.language === "fa" ? "en" : "fa");
+          await i18n.changeLanguage(i18n.language === "fa" ? "en" : "fa");
           await storage().storeData(
             i18n.language === "fa" ? "fa" : "en",
             STORAGE_KEY.lang_key
@@ -60,7 +58,7 @@ const Splash = (props: SplashProps) => {
         lbl={"gotToSeeContent"}
         onPress={() =>
           props.navigation.navigate(ROUTES.Content, {
-            title: "Content",
+            title: "content",
           })
         }
         style={{ paddingHorizontal: 15, marginTop: 20 }}

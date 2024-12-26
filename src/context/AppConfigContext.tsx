@@ -3,7 +3,7 @@ import React, { createContext, useContext, useEffect, useState } from "react";
 import NetInfo from "@react-native-community/netinfo";
 import { Platform } from "react-native";
 
-type ThemeType = "light" | "dark";
+export type ThemeType = "light" | "dark";
 
 type AppConfigContextType = {
   isAndroid: boolean;

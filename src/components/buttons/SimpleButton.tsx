@@ -1,24 +1,26 @@
-import {StyleSheet, TouchableOpacityProps} from 'react-native';
+import { StyleSheet, TouchableOpacityProps } from "react-native";
 
-import React from 'react';
-import {appColors} from '../../utils';
-import {AppText} from '../texts';
-import ButtonWrapper from './ButtonWrapper';
+import React from "react";
+import { AppText } from "../texts";
+import ButtonWrapper from "./ButtonWrapper";
 
 interface ISimpleButton {
-  lbl?: string;
+  lbl: string;
   lblStyle?: object;
 }
 
 const SimpleButton = (props: TouchableOpacityProps & ISimpleButton) => {
   return (
     <ButtonWrapper
-      disabled={props.disabled}
+      hasBgColor={true}
       onPress={props.onPress}
-      style={[styles.btnStyle, props.style]}>
+      disabled={props.disabled}
+      style={[styles.btnStyle, props.style]}
+    >
       <AppText
-        lbl={props.lbl ?? ''}
-        style={[styles.lblStyle, props.lblStyle]}
+        hasBgColor={true}
+        lbl={props.lbl ?? ""}
+        style={[props.lblStyle]}
       />
     </ButtonWrapper>
   );
@@ -30,11 +32,7 @@ const styles = StyleSheet.create({
   btnStyle: {
     height: 45,
     borderRadius: 5,
-    alignItems: 'center',
-    justifyContent: 'center',
-    backgroundColor: appColors.blue,
-  },
-  lblStyle: {
-    color: appColors.white,
+    alignItems: "center",
+    justifyContent: "center",
   },
 });

@@ -2,6 +2,7 @@ import React, { Fragment } from "react";
 
 import { StatusBar } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
+import { useAppConfig } from "../../context";
 import { appColors } from "../../utils";
 import BodyView from "./BodyView";
 
@@ -13,6 +14,7 @@ interface IRootView {
 }
 
 const RootView = (props: IRootView) => {
+  const { theme } = useAppConfig();
   return (
     <Fragment>
       <StatusBar hidden />
@@ -29,7 +31,15 @@ const RootView = (props: IRootView) => {
           backgroundColor: props.bodyBgColor ?? appColors.white,
         }}
       >
-        <BodyView style={props.bodyStyle}>{props.children}</BodyView>
+        <BodyView
+          style={{
+            ...props.bodyStyle,
+            backgroundColor:
+              theme === "light" ? appColors.dark : appColors.grey,
+          }}
+        >
+          {props.children}
+        </BodyView>
       </SafeAreaView>
     </Fragment>
   );
