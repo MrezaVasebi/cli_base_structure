@@ -1,5 +1,6 @@
 import React, { useEffect, useRef } from "react";
 import { Animated, StyleSheet, TouchableOpacityProps } from "react-native";
+import { useAppConfig } from "../../context";
 import { appColors } from "../../utils";
 import ButtonWrapper from "./ButtonWrapper";
 
@@ -8,6 +9,8 @@ export interface ISwitchButton {
 }
 
 const SwitchButton = (props: ISwitchButton & TouchableOpacityProps) => {
+  const { theme } = useAppConfig();
+
   const translateX = useRef(
     new Animated.Value(props.isSelected ? 33 : 5)
   ).current;
@@ -35,11 +38,15 @@ const SwitchButton = (props: ISwitchButton & TouchableOpacityProps) => {
   // Interpolate the background color
   const interpolatedColor = backgroundColor.interpolate({
     inputRange: [0, 1],
-    outputRange: [appColors.blue, appColors.orange],
+    outputRange: [
+      theme === "light" ? appColors.blue : appColors.grey,
+      appColors.orange,
+    ],
   });
 
   return (
     <ButtonWrapper
+      hasBgColor
       onPress={props.onPress}
       style={[styles.btnStyle, props.style]}
     >
@@ -63,7 +70,6 @@ const styles = StyleSheet.create({
     width: 60,
     height: 33,
     borderRadius: 50,
-    backgroundColor: appColors.grey,
   },
   circleStyle: {
     top: 5,

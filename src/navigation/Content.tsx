@@ -6,6 +6,8 @@ import {
   IconButton,
   IconButtonWithLabel,
   LineTabButton,
+  SingleSelectButtonModal,
+  SingleSelectItem,
   SwitchButton,
   TabButton,
 } from "../components/buttons";
@@ -15,6 +17,7 @@ import AnimatedRadioButton from "../components/buttons/AnimatedRadioButton";
 import ThreeTabButton from "../components/buttons/ThreeTabButtons";
 import { RootView } from "../components/others";
 import { AppText } from "../components/texts";
+import { useOpenCloseModal } from "../hooks";
 import { ContentProps } from "../routes";
 
 // import {RouteProp} from '@react-navigation/native';
@@ -22,6 +25,12 @@ import { ContentProps } from "../routes";
 
 // type TestingProp = StackNavigationProp<RootStackParams, 'Testing'>;
 // type TestingRouteProp = RouteProp<RootStackParams, 'Testing'>;
+
+interface IModalData {
+  name: string;
+  label: string;
+  isSelected: boolean;
+}
 
 const Content = (props: ContentProps) => {
   // const navigation: NavigationProp<ParamListBase> =
@@ -39,6 +48,15 @@ const Content = (props: ContentProps) => {
   const [threeTabName, setThreeTabName] = useState<"left" | "right" | "center">(
     "left"
   );
+
+  const { openModal, closeModal, modalAnimation } = useOpenCloseModal();
+  const [itemModal, setItemModal] = useState<boolean>(false);
+  const [selectedItem, setSelectedItem] = useState<string>("chooseAnItem");
+  const [modalData, setModalData] = useState<Array<IModalData>>([
+    { name: "tabriz", label: "Tabriz", isSelected: false },
+    { name: "tehran", label: "Tehran", isSelected: false },
+    { name: "Shiraz", label: "Shiraz", isSelected: false },
+  ]);
 
   return (
     <RootView bodyStyle={styles.rootStyle}>
@@ -147,6 +165,48 @@ const Content = (props: ContentProps) => {
             style={{ marginTop: 10 }}
             onPress={() => setCheck(!check)}
           />
+
+          <SingleSelectButtonModal
+            showModal={itemModal}
+            label={"chooseAnItem"}
+            showCloseBtnModal={true}
+            style={{ marginTop: 10 }}
+            modalTitle={"chooseAnItem"}
+            modalAnimation={modalAnimation}
+            onPressShowModal={() => {
+              openModal(() => setItemModal(true));
+            }}
+            onPressCloseModal={() => {
+              closeModal(() => setItemModal(false));
+            }}
+            placeholder="chooseAnItem"
+            selectedLabel={selectedItem}
+            onDeleteValue={() => setSelectedItem("chooseAnItem")}
+            renderItem={() => null}
+          >
+            <View style={{ padding: 20 }}>
+              {modalData.map((el, index) => {
+                return (
+                  <SingleSelectItem
+                    key={index}
+                    lbl={el.label}
+                    isSelected={el.isSelected}
+                    onPress={() => {
+                      setModalData((pre) =>
+                        pre.map((ele) => {
+                          return ele === el
+                            ? { ...ele, isSelected: true }
+                            : { ...ele, isSelected: false };
+                        })
+                      );
+                      setSelectedItem(el.label);
+                      closeModal(() => setItemModal(false));
+                    }}
+                  />
+                );
+              })}
+            </View>
+          </SingleSelectButtonModal>
         </View>
       </ScrollView>
     </RootView>

@@ -6,8 +6,11 @@ import IconButton from "./IconButton";
 import IconButtonWithLabel from "./IconButtonWithLabel";
 import LineTabButton from "./LineTabButton";
 import SimpleButton from "./SimpleButton";
+import SingleSelectButtonModal from "./SingleSelectButtonModal";
+import SingleSelectItem from "./SingleSelectItem";
 import SwitchButton from "./SwitchButton";
 import TabButton from "./TabButton";
+import TextButton from "./TextButton";
 import ThreeTabButtons from "./ThreeTabButtons";
 
 export {
@@ -19,7 +22,10 @@ export {
   IconButtonWithLabel,
   LineTabButton,
   SimpleButton,
+  SingleSelectButtonModal,
+  SingleSelectItem,
   SwitchButton,
   TabButton,
+  TextButton,
   ThreeTabButtons,
 };

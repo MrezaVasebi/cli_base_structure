@@ -2,7 +2,6 @@ import { StyleSheet, TouchableOpacityProps } from "react-native";
 
 import React from "react";
 import { ButtonWrapper } from ".";
-import { appColors } from "../../utils";
 import AppIcon from "../others/AppIcon";
 
 interface IIconButton {
@@ -15,11 +14,7 @@ const IconButton = (props: TouchableOpacityProps & IIconButton) => {
   return (
     <ButtonWrapper
       onPress={props.onPress}
-      style={[
-        styles.rootStyle,
-        { backgroundColor: appColors.transparent },
-        props.style,
-      ]}
+      style={[styles.rootStyle, props.style]}
     >
       <AppIcon
         name={props.iconName}

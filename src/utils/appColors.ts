@@ -7,5 +7,8 @@ export const appColors = {
   white: "#ffffff",
   green: "#4CAF50",
   orange: "#FF5722",
+  lightBlue: "#3E5879",
   transparent: "transparent",
+  modalLightBgColor: "rgba(0,0,0,.5)",
+  modalDarkBgColor: "rgba(255,255,255,.3)",
 };
