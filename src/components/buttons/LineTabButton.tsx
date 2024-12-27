@@ -10,19 +10,6 @@ import { appColors } from "../../utils";
 import { AppText } from "../texts";
 import ButtonWrapper from "./ButtonWrapper";
 
-// how to use:
-/*
-  const [tabName, setTabName] = useState<"right" | "left">("right");
-      
-  <LineTabButton
-    lblLeft="left"
-    lblRight="right"
-    tabName={tabName}
-    onPressLeft={() => setTabName("left")}
-    onPressRight={() => setTabName("right")}
-  />
-*/
-
 interface ILineTabButton {
   tabName: string;
   lblLeft: string;

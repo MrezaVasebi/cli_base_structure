@@ -19,7 +19,7 @@ const AppConfigContext = createContext<AppConfigContextType | undefined>(
 
 export const useAppConfig = () => {
   const context = useContext(AppConfigContext);
-  if (!context || context === undefined) {
+  if (!context) {
     throw new Error("app config context not initialized");
   }
 

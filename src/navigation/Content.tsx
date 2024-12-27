@@ -10,6 +10,7 @@ import {
   SingleSelectItem,
   SwitchButton,
   TabButton,
+  TextButton,
 } from "../components/buttons";
 
 import { useTranslation } from "react-i18next";
@@ -160,6 +161,12 @@ const Content = (props: ContentProps) => {
             style={{ marginTop: 20 }}
           />
 
+          <TextButton
+            lbl={"Text button"}
+            style={{ marginTop: 10 }}
+            onPress={() => {}}
+          />
+
           <SwitchButton
             isSelected={check}
             style={{ marginTop: 10 }}
@@ -217,7 +224,7 @@ export default Content;
 
 const styles = StyleSheet.create({
   rootStyle: {
-    paddingVertical: 20,
+    paddingTop: 20,
   },
   titleContainer: {
     marginBottom: 20,

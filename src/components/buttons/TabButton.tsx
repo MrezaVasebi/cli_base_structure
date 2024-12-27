@@ -12,20 +12,6 @@ interface ITabButton {
   onPressRight: () => void;
 }
 
-/**
- * How to use:
- * 
- * const [tabName, setTabName] = useState<"left" | "right">("left");
- * 
-  <TabButton
-    tabName={tabName}
-    lblLeft={"left"}
-    lblRight={"right"}
-    onPressLeft={() => setTabName("left")}
-    onPressRight={() => setTabName("right")}
-  />
- */
-
 const TabButton = (props: ITabButton & ViewProps) => {
   return (
     <View style={[styles.rootStyle, props.style]}>

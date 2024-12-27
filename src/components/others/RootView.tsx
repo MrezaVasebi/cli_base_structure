@@ -22,13 +22,21 @@ const RootView = (props: IRootView) => {
       <SafeAreaView
         style={{
           flex: 0,
-          backgroundColor: props.topBgColor ?? appColors.white,
+          backgroundColor: props.topBgColor
+            ? props.topBgColor
+            : theme === "light"
+            ? appColors.dark
+            : appColors.grey,
         }}
       />
       <SafeAreaView
         style={{
           flex: 1,
-          backgroundColor: props.bodyBgColor ?? appColors.white,
+          backgroundColor: props.bodyBgColor
+            ? props.bodyBgColor
+            : theme === "light"
+            ? appColors.dark
+            : appColors.grey,
         }}
       >
         <BodyView

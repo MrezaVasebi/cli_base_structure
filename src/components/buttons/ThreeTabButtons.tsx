@@ -14,22 +14,6 @@ interface ITabButton {
   onPressCenter: () => void;
 }
 
-/**
- * How to use:
- * 
- * const [tabName, setTabName] = useState<"left" | "right" | "center">("left");
- * 
-  <ThreeTabButton
-    tabName={tabName}
-    lblLeft="left"
-    lblRight="right"
-    lblCenter="center"
-    onPressLeft={() => setTabName("left")}
-    onPressRight={() => setTabName("right")}
-    onPressCenter={() => setTabName("center")}
-  />
- */
-
 const ThreeTabButton = (props: ITabButton & ViewProps) => {
   return (
     <View style={[styles.rootStyle, props.style]}>
