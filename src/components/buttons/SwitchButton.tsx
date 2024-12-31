@@ -39,7 +39,7 @@ const SwitchButton = (props: ISwitchButton & TouchableOpacityProps) => {
   const interpolatedColor = backgroundColor.interpolate({
     inputRange: [0, 1],
     outputRange: [
-      theme === "light" ? appColors.blue : appColors.grey,
+      theme === "light" ? appColors.bg.light : appColors.bg.light,
       appColors.orange,
     ],
   });

@@ -1,8 +1,9 @@
-import React, { useEffect, useRef } from "react";
+import React from "react";
 import { useTranslation } from "react-i18next";
-import { Animated, StyleProp, StyleSheet, ViewStyle } from "react-native";
-import { appColors, appFonts } from "../../utils";
-import ButtonWrapper from "./ButtonWrapper.tsx";
+import { StyleProp, ViewStyle } from "react-native";
+import { useAppConfig } from "../../context";
+import { appColors } from "../../utils";
+import SimpleButton from "./SimpleButton";
 
 interface IButtonOfTab {
   tabName: string;
@@ -14,117 +15,58 @@ interface IButtonOfTab {
   style?: StyleProp<ViewStyle>;
 }
 
-interface ICalcAnimation {
-  bgColor: Animated.AnimatedInterpolation<string | number>;
-  txtColor: Animated.AnimatedInterpolation<string | number>;
-}
-
 const ButtonOfTab = (props: IButtonOfTab) => {
-  const { t, i18n } = useTranslation();
-  const animatedValue = useRef(new Animated.Value(0)).current;
+  const { theme } = useAppConfig();
+  const { t } = useTranslation();
 
-  useEffect(() => {
+  const calcUI = () => {
     if (props.tabCounter === "Two") {
-      Animated.timing(animatedValue, {
-        toValue: props.tabName === props.mainLbl ? 1 : 0,
-        duration: 150,
-        useNativeDriver: false,
-      }).start();
-    } else {
-      Animated.timing(animatedValue, {
-        toValue:
+      return {
+        bgColor:
           props.tabName === props.mainLbl
-            ? 2
-            : props.tabName === props.centerLabel
-            ? 1
-            : 0,
-        duration: 150,
-        useNativeDriver: false,
-      }).start();
-    }
-  }, [props.tabName]);
-
-  const calcAnimation = (): ICalcAnimation => {
-    let bgColor, txtColor;
-
-    if (props.tabCounter === "Two") {
-      bgColor = animatedValue.interpolate({
-        inputRange: [0, 1],
-        outputRange:
-          props.mainLbl === props.rightLabel
-            ? [appColors.blue, appColors.white]
-            : [appColors.white, appColors.blue],
-      });
-
-      txtColor = animatedValue.interpolate({
-        inputRange: [0, 1],
-        outputRange:
-          props.mainLbl === props.rightLabel
-            ? [appColors.white, appColors.blue]
-            : [appColors.blue, appColors.white],
-      });
-    } else {
-      bgColor = animatedValue.interpolate({
-        inputRange: [0, 1, 2],
-        outputRange:
-          props.mainLbl === props.rightLabel
-            ? [appColors.blue, appColors.white, appColors.white]
-            : props.mainLbl === props.centerLabel
-            ? [appColors.white, appColors.blue, appColors.white]
-            : [appColors.white, appColors.white, appColors.blue],
-      });
-
-      txtColor = animatedValue.interpolate({
-        inputRange: [0, 1, 2],
-        outputRange:
-          props.mainLbl === props.rightLabel
-            ? [appColors.white, appColors.blue, appColors.blue]
-            : props.mainLbl === props.centerLabel
-            ? [appColors.blue, appColors.white, appColors.blue]
-            : [appColors.blue, appColors.blue, appColors.white],
-      });
+            ? theme === "light"
+              ? appColors.btnBgColor.light
+              : appColors.btnBgColor.dark
+            : appColors.transparent,
+        borderRadius: 50,
+        txtColor:
+          props.tabName === props.mainLbl
+            ? appColors.white
+            : theme === "light"
+            ? appColors.txtColor.dark
+            : appColors.txtColor.dark,
+      };
     }
 
     return {
-      bgColor,
-      txtColor,
+      bgColor:
+        props.tabName === props.mainLbl
+          ? theme === "light"
+            ? appColors.btnBgColor.light
+            : appColors.btnBgColor.dark
+          : appColors.transparent,
+      txtColor:
+        props.tabName === props.mainLbl
+          ? appColors.white
+          : theme === "light"
+          ? appColors.txtColor.dark
+          : appColors.txtColor.dark,
+      borderRadius: 50,
     };
   };
 
   return (
-    <Animated.View
-      style={[
-        styles.tabStyle,
-        {
-          backgroundColor: calcAnimation().bgColor,
-          width: props.tabCounter === "Two" ? "49%" : "32.5%",
-        },
-        props.style,
-      ]}
-    >
-      <ButtonWrapper onPress={props.onPress}>
-        <Animated.Text
-          style={{
-            color: calcAnimation().txtColor,
-            fontFamily: i18n.language === "fa" ? appFonts.fa : appFonts.en,
-          }}
-        >
-          {t(props.mainLbl)}
-        </Animated.Text>
-      </ButtonWrapper>
-    </Animated.View>
+    <SimpleButton
+      lbl={t(props.mainLbl)}
+      onPress={props.onPress}
+      lblStyle={{ color: calcUI()?.txtColor }}
+      style={{
+        backgroundColor: calcUI()?.bgColor,
+        borderRadius: calcUI()?.borderRadius,
+        width: props.tabCounter === "Two" ? "49%" : "33%",
+      }}
+    ></SimpleButton>
   );
 };
 
 export default ButtonOfTab;
-
-const styles = StyleSheet.create({
-  tabStyle: {
-    height: "100%",
-    borderWidth: 1,
-    borderRadius: 50,
-    alignItems: "center",
-    justifyContent: "center",
-    borderColor: appColors.black,
-  },
-});

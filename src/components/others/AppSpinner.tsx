@@ -22,11 +22,11 @@ const AppSpinner = (props: IAppSpinner) => {
           ? color
           : !props.hasBgColor
           ? theme === "light"
-            ? appColors.white
-            : appColors.blue
+            ? appColors.bg.dark
+            : appColors.bg.light
           : theme === "light"
-          ? appColors.blue
-          : appColors.white
+          ? appColors.bg.light
+          : appColors.bg.light
       }
       size={size}
     />

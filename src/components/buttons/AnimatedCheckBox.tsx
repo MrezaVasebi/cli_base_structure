@@ -83,15 +83,15 @@ const styles = StyleSheet.create({
     marginRight: 10,
     alignItems: "center",
     justifyContent: "center",
-    borderColor: appColors.green,
+    borderColor: appColors.orange,
   },
   checked: {
-    backgroundColor: appColors.green,
+    backgroundColor: appColors.orange,
   },
   checkmark: {
     fontSize: 18,
     fontWeight: "bold",
-    color: appColors.white,
+    color: appColors.bg.light,
   },
 });
 

@@ -21,12 +21,12 @@ const SingleSelectItem = (props: ISingleSelectItem) => {
         color: props.isSelected
           ? appColors.orange
           : theme === "light"
-          ? appColors.grey
-          : appColors.blue,
+          ? appColors.bg.dark
+          : appColors.bg.light,
       }}
       style={{
         ...styles.itemStyle,
-        borderColor: theme === "light" ? appColors.grey : appColors.blue,
+        borderColor: theme === "light" ? appColors.bg.dark : appColors.bg.light,
       }}
       onPress={props.onPress}
     />

@@ -2,6 +2,8 @@ import React, { createContext, useContext, useEffect, useState } from "react";
 
 import NetInfo from "@react-native-community/netinfo";
 import { Platform } from "react-native";
+import { storage } from "../modules/storage.ts";
+import { STORAGE_KEY } from "../utils";
 
 export type ThemeType = "light" | "dark";
 
@@ -48,10 +50,26 @@ export const AppConfigProvider = (props: IAppConfigProvider) => {
       setHasNetwork(state.isConnected);
     });
 
+    // get theme
+    getTheme();
+
     return () => {
       unsubscribe();
     };
   }, []);
+
+  const getTheme = async () => {
+    await storage<ThemeType>()
+      .readData(STORAGE_KEY.theme_key)
+      .then((res) => {
+        if (res) {
+          setTheme(res);
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
 
   return (
     <AppConfigContext.Provider

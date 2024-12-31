@@ -37,7 +37,7 @@ const Btn = (props: IBtn & TouchableOpacityProps) => {
         styles.btnStyle,
         props.style,
         {
-          borderColor: theme === "light" ? appColors.orange : appColors.black,
+          borderColor: theme === "light" ? appColors.bg.dark : appColors.orange,
           borderBottomWidth: tabName === label ? 2.5 : 0,
         },
       ]}
@@ -55,7 +55,7 @@ const Btn = (props: IBtn & TouchableOpacityProps) => {
 
 const LineTabButton = (props: ILineTabButton & ViewProps) => {
   return (
-    <View style={[styles.root, props.style]}>
+    <View style={[styles.root, {}, props.style]}>
       <Btn
         label={props.lblLeft}
         tabName={props.tabName}
@@ -80,7 +80,7 @@ const styles = StyleSheet.create({
     height: 45,
     flexDirection: "row",
     borderBottomWidth: 1,
-    borderColor: appColors.white,
+    borderBottomColor: appColors.darkGrey
   },
   btnStyle: {
     bottom: -1,

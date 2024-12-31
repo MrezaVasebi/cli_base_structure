@@ -1,4 +1,5 @@
 import AnimatedCheckBox from "./AnimatedCheckBox";
+import AnimatedRadioButton from "./AnimatedRadioButton";
 import AppLoadingButton from "./AppLoadingButton";
 import ButtonOfTab from "./ButtonOfTab";
 import ButtonWrapper from "./ButtonWrapper";
@@ -15,6 +16,7 @@ import ThreeTabButtons from "./ThreeTabButtons";
 
 export {
   AnimatedCheckBox,
+  AnimatedRadioButton,
   AppLoadingButton,
   ButtonOfTab,
   ButtonWrapper,

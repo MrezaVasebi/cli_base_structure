@@ -1,7 +1,9 @@
 import React from "react";
 import {
   OpaqueColorValue,
+  StyleProp,
   StyleSheet,
+  TextStyle,
   type TouchableOpacityProps,
 } from "react-native";
 import { useAppConfig } from "../../context";
@@ -13,9 +15,10 @@ import ButtonWrapper from "./ButtonWrapper";
 interface IIconWithLabelButton {
   label: string;
   iconName: string;
-  lblStyle?: object;
   iconStyle?: object;
+  hasBgColor?: boolean;
   iconSize?: number | undefined;
+  lblStyle?: StyleProp<TextStyle>;
   iconColor?: string | OpaqueColorValue;
 }
 
@@ -28,21 +31,13 @@ const IconWithLabelButton = (
     <ButtonWrapper
       onPress={props.onPress}
       disabled={props.disabled}
-      style={[
-        styles.rootStyle,
-        {
-          backgroundColor: theme === "light" ? appColors.white : appColors.blue,
-        },
-        props.style,
-      ]}
+      hasBgColor={props.hasBgColor}
+      style={[styles.rootStyle, props.style]}
     >
       <AppText
+        hasBgColor
         lbl={props.label}
-        style={{
-          ...styles.lblStyle,
-          color: theme === "light" ? appColors.blue : appColors.white,
-          ...props.lblStyle,
-        }}
+        style={[styles.lblStyle, props.lblStyle]}
       />
 
       <AppIcon
@@ -50,8 +45,8 @@ const IconWithLabelButton = (
         size={props.iconSize}
         color={
           props.iconColor ?? theme === "light"
-            ? appColors.blue
-            : appColors.white
+            ? appColors.bg.light
+            : appColors.bg.light
         }
       />
     </ButtonWrapper>
@@ -68,7 +63,6 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     flexDirection: "row-reverse",
-    backgroundColor: appColors.blue,
   },
   lblStyle: {
     marginLeft: 10,

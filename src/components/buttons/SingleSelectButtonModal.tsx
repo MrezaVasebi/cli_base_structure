@@ -1,4 +1,5 @@
 import React from "react";
+import { useTranslation } from "react-i18next";
 import {
   Animated,
   StyleProp,
@@ -10,7 +11,7 @@ import {
   ViewStyle,
 } from "react-native";
 import { useAppConfig } from "../../context/AppConfigContext.tsx";
-import { appColors } from "../../utils";
+import { appColors, shadowStyle } from "../../utils";
 import AnimatedRootModal from "../modals/AnimatedRootModal.tsx";
 import AppText from "../texts/AppText";
 import ButtonWrapper from "./ButtonWrapper";
@@ -38,6 +39,7 @@ interface ISingleSelectButtonModal<D> {
 const SingleSelectButtonModal = <D,>(
   props: ISingleSelectButtonModal<D> & TouchableOpacityProps & ViewProps
 ) => {
+  const { i18n } = useTranslation();
   const { theme } = useAppConfig();
 
   return (
@@ -49,7 +51,8 @@ const SingleSelectButtonModal = <D,>(
           styles.innerStyle,
           {
             backgroundColor:
-              theme === "light" ? appColors.grey : appColors.blue,
+              theme === "light" ? appColors.white : appColors.white,
+            ...shadowStyle,
           },
           props.innerStyle,
         ]}
@@ -61,16 +64,26 @@ const SingleSelectButtonModal = <D,>(
           ]}
           onPress={props.onPressShowModal}
         >
-          <AppText lbl={props.selectedLabel} hasBgColor />
+          <AppText
+            lbl={props.selectedLabel}
+            color={
+              props.selectedLabel === props.placeholder
+                ? appColors.darkGrey
+                : appColors.black
+            }
+          />
         </ButtonWrapper>
 
         {props.selectedLabel !== props.placeholder ? (
           <IconButton
             iconSize={20}
             iconName="close"
-            style={styles.deleteBtnStyle}
+            style={{
+              ...styles.deleteBtnStyle,
+              ...(i18n.language === "fa" ? { left: 5 } : { right: 5 }),
+            }}
             onPress={props.onDeleteValue}
-            iconColor={theme === "light" ? appColors.blue : appColors.grey}
+            iconColor={appColors.black}
           />
         ) : null}
       </View>
@@ -95,11 +108,13 @@ const styles = StyleSheet.create({
   lblStyle: {},
   innerStyle: {
     height: 45,
-    marginTop: 10,
+    marginTop: 5,
     borderRadius: 5,
     overflow: "hidden",
     paddingHorizontal: 7,
     flexDirection: "row",
+    // backgroundColor: appColors.white,
+    // ...shadowStyle,
   },
   showModalStyle: {
     flex: 1,

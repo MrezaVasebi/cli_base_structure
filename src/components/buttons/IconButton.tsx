@@ -8,12 +8,14 @@ interface IIconButton {
   iconName: string;
   iconSize?: number;
   iconColor?: string;
+  hasBgColor?: boolean;
 }
 
 const IconButton = (props: TouchableOpacityProps & IIconButton) => {
   return (
     <ButtonWrapper
       onPress={props.onPress}
+      hasBgColor={props.hasBgColor}
       style={[styles.rootStyle, props.style]}
     >
       <AppIcon

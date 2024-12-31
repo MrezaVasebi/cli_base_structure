@@ -4,7 +4,7 @@ import Entypo from "react-native-vector-icons/Entypo";
 import Ionicons from "react-native-vector-icons/Ionicons";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 import { useAppConfig } from "../../context";
-import { appColors } from "../../utils";
+import { appColors, iconsName } from "../../utils";
 
 export interface IAppIcon {
   name?: string;
@@ -19,28 +19,39 @@ const AppIcon = ({ name, size, color }: IAppIcon) => {
   const defaultColor = color
     ? color
     : theme === "light"
-    ? appColors.white
-    : appColors.black;
+    ? appColors.bg.dark
+    : appColors.bg.light;
 
   const handleIcons = () => {
     switch (name) {
-      case "language": {
+      case iconsName.heart: {
+        return (
+          <AntDesign name={name} color={defaultColor} size={defaultSize} />
+        );
+      }
+      case iconsName["eye-with-line"]: {
         return <Entypo name={name} color={defaultColor} size={defaultSize} />;
       }
-      case "close": {
+      case iconsName.eye: {
+        return <Entypo name={name} color={defaultColor} size={defaultSize} />;
+      }
+      case iconsName.language: {
+        return <Entypo name={name} color={defaultColor} size={defaultSize} />;
+      }
+      case iconsName.close: {
         return <Ionicons name={name} color={defaultColor} size={defaultSize} />;
       }
-      case "arrowleft": {
+      case iconsName.arrowleft: {
         return (
           <AntDesign name={name} color={defaultColor} size={defaultSize} />
         );
       }
-      case "arrowright": {
+      case iconsName.arrowright: {
         return (
           <AntDesign name={name} color={defaultColor} size={defaultSize} />
         );
       }
-      case "theme-light-dark": {
+      case iconsName["theme-light-dark"]: {
         return (
           <MaterialCommunityIcons
             name={name}

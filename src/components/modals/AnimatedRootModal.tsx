@@ -75,8 +75,8 @@ const AnimatedRootModal = (props: IAnimatedRootModal & ViewProps) => {
           {
             backgroundColor:
               theme === "light"
-                ? appColors.modalDarkBgColor
-                : appColors.modalLightBgColor,
+                ? appColors.modalLightBgColor
+                : appColors.modalDarkBgColor,
           },
           animatedStyle,
           props.style,
@@ -87,7 +87,7 @@ const AnimatedRootModal = (props: IAnimatedRootModal & ViewProps) => {
             styles.innerStyle,
             {
               backgroundColor:
-                theme === "light" ? appColors.dark : appColors.grey,
+                theme === "light" ? appColors.bg.light : appColors.bg.dark,
             },
             props.innerStyle,
           ]}

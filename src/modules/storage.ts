@@ -21,7 +21,7 @@ export const storage = <T>() => {
     readData: async (key: string) => {
       try {
         const value = await AsyncStorage.getItem(key);
-        return value ? value : null;
+        return value ? (value as T) : null;
       } catch (error) {
         return null;
       }

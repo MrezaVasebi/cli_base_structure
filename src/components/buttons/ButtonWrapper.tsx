@@ -19,8 +19,8 @@ const ButtonWrapper = (props: TouchableOpacityProps & IButtonWrapper) => {
           backgroundColor: !props.hasBgColor
             ? appColors.transparent
             : theme === "light"
-            ? appColors.white
-            : appColors.blue,
+            ? appColors.btnBgColor.light
+            : appColors.btnBgColor.dark,
         },
         props.style,
       ]}

@@ -25,8 +25,8 @@ const RootView = (props: IRootView) => {
           backgroundColor: props.topBgColor
             ? props.topBgColor
             : theme === "light"
-            ? appColors.dark
-            : appColors.grey,
+            ? appColors.bg.light
+            : appColors.bg.dark,
         }}
       />
       <SafeAreaView
@@ -35,15 +35,15 @@ const RootView = (props: IRootView) => {
           backgroundColor: props.bodyBgColor
             ? props.bodyBgColor
             : theme === "light"
-            ? appColors.dark
-            : appColors.grey,
+            ? appColors.bg.light
+            : appColors.bg.dark,
         }}
       >
         <BodyView
           style={{
             ...props.bodyStyle,
             backgroundColor:
-              theme === "light" ? appColors.dark : appColors.grey,
+              theme === "light" ? appColors.bg.light : appColors.bg.dark,
           }}
         >
           {props.children}

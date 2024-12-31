@@ -1,4 +1,4 @@
-import { StyleSheet, Text, TextProps } from "react-native";
+import { ColorValue, StyleSheet, Text, TextProps } from "react-native";
 import { appColors, appFonts } from "../../utils";
 
 import React from "react";
@@ -7,6 +7,7 @@ import { useAppConfig } from "../../context";
 
 interface IAppText {
   lbl?: string;
+  color?: ColorValue;
   hasBgColor?: boolean;
 }
 
@@ -20,13 +21,16 @@ const AppText = (props: IAppText & TextProps) => {
       style={[
         styles.rootStyle,
         {
-          color: !props.hasBgColor
+          color: props.color
+            ? props.color
+            : !props.hasBgColor
             ? theme === "light"
-              ? appColors.white
-              : appColors.dark
+              ? appColors.txtColor.dark
+              : appColors.txtColor.light
             : theme === "light"
-            ? appColors.blue
-            : appColors.white,
+            ? appColors.txtColor.light
+            : appColors.txtColor.light,
+
           fontFamily: lang === "fa" ? appFonts.fa : appFonts.en,
           textAlign: lang === "fa" ? "right" : "justify",
         },
@@ -35,7 +39,7 @@ const AppText = (props: IAppText & TextProps) => {
       ellipsizeMode={props.lineBreakMode}
       numberOfLines={props.numberOfLines}
     >
-      {t(props.lbl ?? "")}
+      {t(props.lbl ? props.lbl : "")}
     </Text>
   );
 };
@@ -44,6 +48,6 @@ export default AppText;
 
 const styles = StyleSheet.create({
   rootStyle: {
-    fontSize: 13,
+    fontSize: 14,
   },
 });

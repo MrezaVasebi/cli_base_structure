@@ -64,15 +64,13 @@ export default ThreeTabButton;
 
 const styles = StyleSheet.create({
   rootStyle: {
-    height: 50,
+    height: 45,
     alignItems: "center",
     justifyContent: "center",
   },
   innerStyle: {
-    padding: 5,
-    width: "100%",
-    height: "100%",
-    borderRadius: 50,
+    padding: 1,
+    borderRadius: 45,
     overflow: "hidden",
     flexDirection: "row",
     alignItems: "center",

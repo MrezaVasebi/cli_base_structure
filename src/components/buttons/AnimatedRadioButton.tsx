@@ -89,13 +89,13 @@ const styles = StyleSheet.create({
     borderRadius: 15,
     alignItems: "center",
     justifyContent: "center",
-    borderColor: appColors.green,
+    borderColor: appColors.orange,
   },
   radioInnerCircle: {
     width: 16,
     height: 16,
     borderRadius: 8,
-    backgroundColor: appColors.green,
+    backgroundColor: appColors.orange,
   },
 });
 

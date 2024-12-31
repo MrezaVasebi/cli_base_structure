@@ -44,7 +44,7 @@ const Splash = (props: SplashProps) => {
         onPress={async () => {
           setTheme(theme === "light" ? "dark" : "light");
           await storage().storeData(
-            theme === "light" ? "light" : "dark",
+            theme === "light" ? "dark" : "light",
             STORAGE_KEY.theme_key
           );
         }}
