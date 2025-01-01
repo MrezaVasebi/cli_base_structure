@@ -16,13 +16,22 @@ import {
 } from "../components/buttons";
 
 import { useTranslation } from "react-i18next";
-// import ThreeTabButton from "../components/buttons/ThreeTabButtons";
 import { RootView } from "../components/others";
 import { AppText } from "../components/texts";
 import { useAppConfig } from "../context";
 import { useOpenCloseModal } from "../hooks";
 import { ContentProps } from "../routes";
 import { appColors, iconsName } from "../utils";
+import {
+  CreditCardInput,
+  IbanInput,
+  InputPhoneNumber,
+  InputWithClearButton,
+  InputWithLabel,
+  PriceInput,
+  SecureInput,
+  SimpleInput,
+} from "../components/inputs";
 
 // import {RouteProp} from '@react-navigation/native';
 // import {StackNavigationProp} from '@react-navigation/stack';
@@ -262,80 +271,81 @@ const Content = (props: ContentProps) => {
           </View>
         )}
 
-        {/*<TextButton*/}
-        {/*  lbl="inputs"*/}
-        {/*  lblStyle={{*/}
-        {/*    ...styles.itemButton,*/}
-        {/*    borderColor: theme === "light" ? appColors.grey : appColors.blue,*/}
-        {/*  }}*/}
-        {/*  onPress={() => setShowInputs(!showInputs)}*/}
-        {/*  style={{ marginBottom: showInputs ? 0 : 20 }}*/}
-        {/*/>*/}
-        {/*{showInputs ? (*/}
-        {/*  <View style={{ paddingVertical: 20 }}>*/}
-        {/*    <SimpleInput*/}
-        {/*      value={enteredValue}*/}
-        {/*      secureTextEntry={secureText}*/}
-        {/*      style={{ marginBottom: 10 }}*/}
-        {/*      onChangeText={(v: string) => setEnteredValue(v)}*/}
-        {/*    />*/}
+        <TextButton
+          lbl="inputs"
+          lblStyle={{
+            ...styles.itemButton,
+            borderColor:
+              theme === "light" ? appColors.bg.dark : appColors.bg.light,
+          }}
+          onPress={() => setShowInputs(!showInputs)}
+          style={{ marginBottom: showInputs ? 0 : 20 }}
+        />
+        {showInputs ? (
+          <View style={{ paddingVertical: 20 }}>
+            <SimpleInput
+              value={enteredValue}
+              style={{ marginBottom: 20 }}
+              onChangeText={(v: string) => setEnteredValue(v)}
+            />
 
-        {/*    <SecureInput*/}
-        {/*      value={enteredValue}*/}
-        {/*      secureTextEntry={secureText}*/}
-        {/*      style={{ marginBottom: 10 }}*/}
-        {/*      onPressEye={() => setSecureText(!secureText)}*/}
-        {/*      onChangeText={(v: string) => setEnteredValue(v)}*/}
-        {/*    />*/}
+            <SecureInput
+              value={enteredValue}
+              secureTextEntry={secureText}
+              style={{ marginBottom: 20 }}
+              onPressEye={() => setSecureText(!secureText)}
+              onChangeText={(v: string) => setEnteredValue(v)}
+            />
 
-        {/*    <InputWithClearButton*/}
-        {/*      value={enteredValue}*/}
-        {/*      lbl={"Enter First Name"}*/}
-        {/*      rootStyle={{ marginTop: 10 }}*/}
-        {/*      onPressClear={() => setEnteredValue("")}*/}
-        {/*      onChangeText={(v: string) => setEnteredValue(v)}*/}
-        {/*    />*/}
+            <InputWithClearButton
+              visible={true}
+              value={enteredValue}
+              lbl={"enterFirstName"}
+              rootStyle={{ marginTop: 20 }}
+              onPressClear={() => setEnteredValue("")}
+              onChangeText={(v: string) => setEnteredValue(v)}
+            />
 
-        {/*    <InputWithLabel*/}
-        {/*      lbl="enterFirstName"*/}
-        {/*      value={enteredValue}*/}
-        {/*      rootStyle={{ marginTop: 10 }}*/}
-        {/*      onChangeText={(v: string) => setEnteredValue(v)}*/}
-        {/*    />*/}
+            <InputWithLabel
+              lbl="enterLastName"
+              value={enteredValue}
+              rootStyle={{ marginTop: 20 }}
+              onChangeText={(v: string) => setEnteredValue(v)}
+            />
 
-        {/*    <IbanInput*/}
-        {/*      type="custom"*/}
-        {/*      visible={true}*/}
-        {/*      value={enteredValue}*/}
-        {/*      rootStyle={{ marginTop: 10 }}*/}
-        {/*      onChangeText={(v: string) => setEnteredValue(v)}*/}
-        {/*    />*/}
+            <IbanInput
+              type="custom"
+              visible={true}
+              value={enteredValue}
+              rootStyle={{ marginTop: 20 }}
+              onChangeText={(v: string) => setEnteredValue(v)}
+            />
 
-        {/*    <CreditCardInput*/}
-        {/*      visible={true}*/}
-        {/*      type="credit-card"*/}
-        {/*      value={enteredValue}*/}
-        {/*      rootStyle={{ marginTop: 10 }}*/}
-        {/*      onChangeText={(v: string) => setEnteredValue(v)}*/}
-        {/*    />*/}
+            <CreditCardInput
+              visible={true}
+              type="credit-card"
+              value={enteredValue}
+              rootStyle={{ marginTop: 20 }}
+              onChangeText={(v: string) => setEnteredValue(v)}
+            />
 
-        {/*    <InputPhoneNumber*/}
-        {/*      type="custom"*/}
-        {/*      visible={true}*/}
-        {/*      value={enteredValue}*/}
-        {/*      rootStyle={{ marginTop: 10 }}*/}
-        {/*      onChangeText={(v: string) => setEnteredValue(v)}*/}
-        {/*    />*/}
+            <InputPhoneNumber
+              type="custom"
+              visible={true}
+              value={enteredValue}
+              rootStyle={{ marginTop: 20 }}
+              onChangeText={(v: string) => setEnteredValue(v)}
+            />
 
-        {/*    <PriceInput*/}
-        {/*      type="money"*/}
-        {/*      visible={true}*/}
-        {/*      value={enteredValue}*/}
-        {/*      rootStyle={{ marginTop: 10 }}*/}
-        {/*      onChangeText={(v: string) => setEnteredValue(v)}*/}
-        {/*    />*/}
-        {/*  </View>*/}
-        {/*) : null}*/}
+            <PriceInput
+              type="money"
+              visible={true}
+              value={enteredValue}
+              rootStyle={{ marginTop: 20 }}
+              onChangeText={(v: string) => setEnteredValue(v)}
+            />
+          </View>
+        ) : null}
       </ScrollView>
     </RootView>
   );

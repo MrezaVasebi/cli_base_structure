@@ -1,11 +1,9 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
 import { StyleSheet, TextInput, TextInputProps } from "react-native";
-import { useAppConfig } from "../../context";
-import { appColors, appFonts } from "../../utils";
+import { appColors, appFonts, shadowStyle } from "../../utils";
 
 const SimpleInput = (props: TextInputProps) => {
-  const { theme } = useAppConfig();
   const { t, i18n } = useTranslation();
 
   return (
@@ -18,9 +16,7 @@ const SimpleInput = (props: TextInputProps) => {
         styles.style,
         {
           textAlign: i18n.language === "fa" ? "right" : "left",
-          color: theme === "light" ? appColors.blue : appColors.grey,
           fontFamily: i18n.language === "fa" ? appFonts.fa : appFonts.en,
-          backgroundColor: theme === "light" ? appColors.grey : appColors.blue,
         },
         props.style,
       ]}
@@ -29,9 +25,7 @@ const SimpleInput = (props: TextInputProps) => {
       placeholderTextColor={
         props.placeholderTextColor
           ? props.placeholderTextColor
-          : theme === "light"
-          ? appColors.darkGrey
-          : appColors.grey
+          : appColors.darkGrey
       }
     />
   );
@@ -42,7 +36,11 @@ export default SimpleInput;
 const styles = StyleSheet.create({
   style: {
     height: 45,
+    fontSize: 15,
     borderRadius: 5,
     paddingHorizontal: 10,
+    color: appColors.black,
+    backgroundColor: appColors.white,
+    ...shadowStyle,
   },
 });

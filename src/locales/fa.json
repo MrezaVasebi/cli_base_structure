@@ -10,10 +10,12 @@
   "chooseAnItem": "آیتم را انتخاب کنید",
   "enterSth": "اینجا بنویسید...",
   "enterFirstName": "نام خود را وارد کنید",
+  "enterLastName": "نام خانوادگی خود را وارد کنید",
   "enterIbanNumber": "شماره شبا را وارد نمائید",
   "enterCreditCardNumber": "شماره کارت بانکی را وارد نمائید",
   "enterPhoneNumber": "شماره تلفن خود را وارد کنید",
   "enterDesiredMoney": "مبلغ مورد نظر خود را وارد کنید",
   "enterAmount": "مقدار را وارد کنید",
-  "createAccount": "ایجاد حساب کاربری"
+  "createAccount": "ایجاد حساب کاربری",
+  "irr": "ریال"
 }

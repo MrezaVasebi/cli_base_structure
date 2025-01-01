@@ -12,7 +12,7 @@ import {
   type TextInputMaskProps,
 } from "react-native-masked-text";
 import { useAppConfig } from "../../context";
-import { appColors, appFonts } from "../../utils";
+import { appColors, appFonts, shadowStyle } from "../../utils";
 import { AppText } from "../texts";
 
 interface ICreditCardInput {
@@ -43,19 +43,11 @@ const CreditCardInput = (props: TextInputMaskProps & ICreditCardInput) => {
         placeholderTextColor={
           props.placeholderTextColor
             ? props.placeholderTextColor
-            : theme === "light"
-            ? appColors.darkGrey
-            : appColors.grey
+            : appColors.darkGrey
         }
         style={[
           styles.inputStyle,
-          {
-            textAlign: "center",
-            color: theme === "light" ? appColors.blue : appColors.grey,
-            fontFamily: i18n.language === "fa" ? appFonts.fa : appFonts.en,
-            backgroundColor:
-              theme === "light" ? appColors.grey : appColors.blue,
-          },
+          { fontFamily: i18n.language === "fa" ? appFonts.fa : appFonts.en },
           props.style,
         ]}
       />
@@ -68,9 +60,12 @@ export default CreditCardInput;
 const styles = StyleSheet.create({
   inputStyle: {
     height: 45,
-    fontSize: 13,
+    fontSize: 15,
     borderRadius: 5,
     textAlign: "center",
+    color: appColors.black,
+    backgroundColor: appColors.white,
+    ...shadowStyle,
   },
   lblStyle: {
     marginBottom: 5,

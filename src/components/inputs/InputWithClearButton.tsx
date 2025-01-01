@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from "react";
+import React from "react";
 import {
   Animated,
   StyleProp,
@@ -59,7 +59,7 @@ const InputWithClearButton = (
           <IconButton
             iconName={iconsName.close}
             onPress={props.onPressClear}
-            iconColor={theme === "light" ? appColors.blue : appColors.grey}
+            iconColor={appColors.black}
           />
         </Animated.View>
       )}

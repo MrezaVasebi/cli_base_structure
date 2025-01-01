@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from "react";
+import React from "react";
 import { useTranslation } from "react-i18next";
 import {
   Animated,
@@ -30,15 +30,7 @@ const SecureInput = (props: ISecureInput & TextInputProps) => {
   const { fadeAnim } = useFadeAnimation(props.value);
 
   return (
-    <View
-      style={[
-        {
-          ...styles.rootStyle,
-          backgroundColor: theme === "light" ? appColors.grey : appColors.dark,
-        },
-        props.rootStyle,
-      ]}
-    >
+    <View style={[styles.rootStyle, props.rootStyle]}>
       {props.visible ? (
         <AppText lbl={props.lbl} style={[styles.lblStyle, props.lblStyle]} />
       ) : null}
@@ -63,7 +55,7 @@ const SecureInput = (props: ISecureInput & TextInputProps) => {
         >
           <IconButton
             onPress={props.onPressEye}
-            iconColor={theme === "light" ? appColors.blue : appColors.grey}
+            iconColor={appColors.black}
             iconName={
               !props.secureTextEntry
                 ? iconsName.eye

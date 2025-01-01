@@ -11,8 +11,7 @@ import {
   TextInputMask,
   type TextInputMaskProps,
 } from "react-native-masked-text";
-import { useAppConfig } from "../../context";
-import { appColors, appFonts } from "../../utils";
+import { appColors, appFonts, shadowStyle } from "../../utils";
 import { AppText } from "../texts";
 
 interface IInputPhoneNumber {
@@ -23,7 +22,7 @@ interface IInputPhoneNumber {
 
 const InputPhoneNumber = (props: TextInputMaskProps & IInputPhoneNumber) => {
   const { i18n } = useTranslation();
-  const { theme } = useAppConfig();
+
   return (
     <View style={[props.rootStyle]}>
       {props.visible ? (
@@ -46,18 +45,13 @@ const InputPhoneNumber = (props: TextInputMaskProps & IInputPhoneNumber) => {
         placeholderTextColor={
           props.placeholderTextColor
             ? props.placeholderTextColor
-            : theme === "light"
-            ? appColors.darkGrey
-            : appColors.grey
+            : appColors.darkGrey
         }
         style={[
           styles.inputStyle,
           {
-            textAlign: "center",
-            color: theme === "light" ? appColors.blue : appColors.grey,
+            textAlign: i18n.language === "fa" ? "right" : "left",
             fontFamily: i18n.language === "fa" ? appFonts.fa : appFonts.en,
-            backgroundColor:
-              theme === "light" ? appColors.grey : appColors.blue,
           },
           props.style,
         ]}
@@ -71,9 +65,12 @@ export default InputPhoneNumber;
 const styles = StyleSheet.create({
   inputStyle: {
     height: 45,
-    fontSize: 13,
+    fontSize: 15,
     borderRadius: 5,
-    textAlign: "center",
+    paddingHorizontal: 10,
+    color: appColors.black,
+    backgroundColor: appColors.white,
+    ...shadowStyle,
   },
   lblStyle: {
     marginBottom: 5,

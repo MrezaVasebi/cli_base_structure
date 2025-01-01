@@ -9,7 +9,7 @@ import {
 } from "react-native";
 import { TextInputMask, TextInputMaskProps } from "react-native-masked-text";
 import { useAppConfig } from "../../context";
-import { appColors, appFonts } from "../../utils";
+import { appColors, appFonts, shadowStyle } from "../../utils";
 import { AppText } from "../texts";
 
 interface IIbanInput {
@@ -31,22 +31,8 @@ const IbanInput = (props: TextInputMaskProps & IIbanInput) => {
         />
       ) : null}
 
-      <View
-        style={[
-          styles.ibanContainer,
-          {
-            backgroundColor:
-              theme === "light" ? appColors.grey : appColors.blue,
-          },
-        ]}
-      >
-        <AppText
-          lbl="IR"
-          style={{
-            fontSize: 15,
-            color: theme === "light" ? appColors.blue : appColors.grey,
-          }}
-        />
+      <View style={[styles.ibanContainer]}>
+        <AppText lbl="IR" style={styles.unitStyle} />
 
         <TextInputMask
           type={"custom"}
@@ -59,10 +45,7 @@ const IbanInput = (props: TextInputMaskProps & IIbanInput) => {
           style={{
             ...styles.ibanStyle,
             ...{
-              textAlign: "center",
-              color: theme === "light" ? appColors.blue : appColors.grey,
               fontFamily: i18n.language === "fa" ? appFonts.fa : appFonts.en,
-              backgroundColor: appColors.transparent,
             },
           }}
           onChangeText={props.onChangeText}
@@ -70,9 +53,7 @@ const IbanInput = (props: TextInputMaskProps & IIbanInput) => {
           placeholderTextColor={
             props.placeholderTextColor
               ? props.placeholderTextColor
-              : theme === "light"
-              ? appColors.darkGrey
-              : appColors.grey
+              : appColors.darkGrey
           }
         />
       </View>
@@ -92,15 +73,20 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "center",
+    backgroundColor: appColors.white,
+    ...shadowStyle,
   },
   lblStyle: {
     marginBottom: 5,
   },
+  unitStyle: {
+    fontSize: 15,
+    color: appColors.black,
+  },
   ibanStyle: {
     flex: 1,
-    fontSize: 13,
+    fontSize: 15,
     textAlign: "center",
-    color: appColors.dark,
-    backgroundColor: appColors.white,
+    color: appColors.black,
   },
 });

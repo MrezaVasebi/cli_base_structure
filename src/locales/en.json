@@ -10,10 +10,12 @@
   "chooseAnItem": "Choose an item",
   "enterSth": "Enter some thing...",
   "enterFirstName": "Enter first name",
+  "enterLastName": "Enter last name",
   "enterIbanNumber": "Enter IBAN Number",
   "enterCreditCardNumber": "Enter Credit Card Number",
   "enterPhoneNumber": "Enter Phone Number",
   "enterDesiredMoney": "Enter desired money",
   "enterAmount": "Enter amount",
-  "createAccount": "Create Account"
+  "createAccount": "Create Account",
+  "irr": "IRR"
 }
