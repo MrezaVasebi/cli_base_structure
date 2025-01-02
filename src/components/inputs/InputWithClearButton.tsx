@@ -1,4 +1,5 @@
 import React from "react";
+import { useTranslation } from "react-i18next";
 import {
   Animated,
   StyleProp,
@@ -8,13 +9,12 @@ import {
   View,
   ViewStyle,
 } from "react-native";
-import SimpleInput from "./SimpleInput";
-import { AppText } from "../texts";
-import { IconButton } from "../buttons";
-import { appColors, iconsName } from "../../utils";
-import { useTranslation } from "react-i18next";
 import { useAppConfig } from "../../context";
 import { useFadeAnimation } from "../../hooks";
+import { appColors, iconsName } from "../../utils";
+import { IconButton } from "../buttons";
+import { AppText } from "../texts";
+import SimpleInput from "./SimpleInput";
 
 interface IInputWithClearButton {
   lbl: string;
@@ -74,7 +74,7 @@ const styles = StyleSheet.create({
     marginBottom: 5,
   },
   iconStyle: {
-    top: 7,
+    bottom: 7,
     position: "absolute",
   },
 });

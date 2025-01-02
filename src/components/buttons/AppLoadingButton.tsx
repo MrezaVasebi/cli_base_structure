@@ -4,7 +4,7 @@ import {
   StyleSheet,
   type TouchableOpacityProps,
 } from "react-native";
-import { AppSpinner } from "../others";
+import { CustomSpinner } from "../others";
 import { AppText } from "../texts";
 import ButtonWrapper from "./ButtonWrapper";
 
@@ -25,7 +25,7 @@ const AppLoadingButton = (props: IAppLoadingButton & TouchableOpacityProps) => {
       style={[styles.btnStyle, props.style]}
     >
       {props.loading ? (
-        <AppSpinner
+        <CustomSpinner
           hasBgColor={true}
           color={props.spinnerColor}
           size={props.spinnerSize}

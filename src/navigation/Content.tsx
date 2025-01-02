@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { ScrollView, StyleSheet, View } from "react-native";
 import {
   AnimatedCheckBox,
@@ -7,6 +7,7 @@ import {
   IconButton,
   IconButtonWithLabel,
   LineTabButton,
+  SimpleButton,
   SingleSelectButtonModal,
   SingleSelectItem,
   SwitchButton,
@@ -16,12 +17,6 @@ import {
 } from "../components/buttons";
 
 import { useTranslation } from "react-i18next";
-import { RootView } from "../components/others";
-import { AppText } from "../components/texts";
-import { useAppConfig } from "../context";
-import { useOpenCloseModal } from "../hooks";
-import { ContentProps } from "../routes";
-import { appColors, iconsName } from "../utils";
 import {
   CreditCardInput,
   IbanInput,
@@ -32,6 +27,13 @@ import {
   SecureInput,
   SimpleInput,
 } from "../components/inputs";
+import { AppAvatar, AppDivider, RootView } from "../components/others";
+import { ToastType } from "../components/others/AppToast";
+import { AppText } from "../components/texts";
+import { useAppConfig } from "../context";
+import { useOpenCloseModal } from "../hooks";
+import { ContentProps } from "../routes";
+import { appColors, iconsName } from "../utils";
 
 // import {RouteProp} from '@react-navigation/native';
 // import {StackNavigationProp} from '@react-navigation/stack';
@@ -75,12 +77,30 @@ const Content = (props: ContentProps) => {
 
   const [showInputs, setShowInputs] = useState<boolean>(false);
   const [showButtons, setShowButtons] = useState<boolean>(false);
+  const [showOthers, setShowOthers] = useState<boolean>(false);
 
   const [enteredValue, setEnteredValue] = useState<string>("");
   const [secureText, setSecureText] = useState<boolean>(true);
 
+  const [msgToast, setMsgToast] = useState<string>("");
+  const [typeToast, setTypeToast] = useState<ToastType>("error");
+  const [visibleToast, setVisibleToast] = useState<boolean>(false);
+
+  useEffect(() => {
+    if (visibleToast) {
+      setTimeout(() => {
+        setVisibleToast(false);
+      }, 3000);
+    }
+  }, [visibleToast]);
+
   return (
-    <RootView bodyStyle={styles.rootStyle}>
+    <RootView
+      toastType={typeToast}
+      toastMessage={msgToast}
+      toastVisible={visibleToast}
+      bodyStyle={styles.rootStyle}
+    >
       <View
         style={{
           ...styles.titleContainer,
@@ -343,6 +363,42 @@ const Content = (props: ContentProps) => {
               value={enteredValue}
               rootStyle={{ marginTop: 20 }}
               onChangeText={(v: string) => setEnteredValue(v)}
+            />
+          </View>
+        ) : null}
+
+        <TextButton
+          lbl="others"
+          lblStyle={{
+            ...styles.itemButton,
+            borderColor:
+              theme === "light" ? appColors.bg.dark : appColors.bg.light,
+          }}
+          onPress={() => setShowOthers(!showOthers)}
+          style={{ marginBottom: showOthers ? 0 : 20 }}
+        />
+        {showOthers ? (
+          <View style={{ paddingVertical: 20 }}>
+            <AppAvatar
+              returnUriAndFileName={({ uri, fileName }) => {
+                console.log({ uri, fileName });
+              }}
+              name="Mreza"
+              rootStyle={{ marginTop: 20 }}
+            />
+
+            <AppDivider style={{ marginTop: 20 }} />
+
+            <SimpleButton
+              lbl="Show/Hide toast"
+              style={{ marginTop: 20 }}
+              onPress={() => {
+                setVisibleToast(true);
+                setTypeToast("success");
+                // setMsgToast("This is a info message");
+                setMsgToast("This is a success message");
+                // setMsgToast("This is an error message");
+              }}
             />
           </View>
         ) : null}

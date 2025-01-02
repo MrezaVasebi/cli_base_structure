@@ -17,5 +17,7 @@
   "enterDesiredMoney": "Enter desired money",
   "enterAmount": "Enter amount",
   "createAccount": "Create Account",
-  "irr": "IRR"
+  "irr": "IRR",
+  "noData": "List is empty...",
+  "others":"Others"
 }

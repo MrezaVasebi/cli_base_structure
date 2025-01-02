@@ -11,6 +11,11 @@ export const appColors = {
     dark: "#0B192C",
     light: "#EEEEEE",
   },
+  toastColor: {
+    info: "#669bbc",
+    error: "#c1121f",
+    success: "#008000",
+  },
   white: "#fff",
   black: "#000",
   orange: "#FF5722",

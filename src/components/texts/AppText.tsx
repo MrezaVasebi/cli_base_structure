@@ -48,6 +48,6 @@ export default AppText;
 
 const styles = StyleSheet.create({
   rootStyle: {
-    fontSize: 14,
+    fontSize: 13,
   },
 });
