@@ -14,7 +14,7 @@ const ApiComponent = (props: IApiComponent & ViewProps) => {
   return (
     <View style={styles.rootStyle}>
       {props.loading ? (
-        <CustomSpinner size={"large"} />
+        <CustomSpinner animationType="grid" size={40} />
       ) : !props.loading && props.error ? (
         <View style={styles.container}>
           <AppText lbl={props.error} />

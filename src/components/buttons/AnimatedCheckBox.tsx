@@ -1,17 +1,26 @@
 import React, { useEffect, useRef } from "react";
-import { Animated, StyleSheet, TouchableOpacityProps } from "react-native";
+import {
+  Animated,
+  StyleProp,
+  StyleSheet,
+  TextStyle,
+  TouchableOpacityProps,
+} from "react-native";
 
+import { useAppConfig } from "../../context";
 import { appColors } from "../../utils";
 import { AppText } from "../texts";
 import ButtonWrapper from "./ButtonWrapper";
 
 interface IAnimatedCheckBox {
   lbl?: string;
-  lblStyle?: object;
   isChecked: boolean;
+  lblStyle?: StyleProp<TextStyle>;
 }
 
 const AnimatedCheckBox = (props: TouchableOpacityProps & IAnimatedCheckBox) => {
+  const { theme } = useAppConfig();
+
   const scaleValue = useRef(new Animated.Value(1)).current; // For scaling animation
   const fadeValue = useRef(new Animated.Value(0)).current; // For fading the checkmark
 
@@ -57,7 +66,18 @@ const AnimatedCheckBox = (props: TouchableOpacityProps & IAnimatedCheckBox) => {
       <Animated.View
         style={[
           styles.checkbox,
-          props.isChecked && styles.checked,
+          {
+            borderColor:
+              theme === "light"
+                ? appColors.btnBgColor.light
+                : appColors.btnBgColor.dark,
+          },
+          props.isChecked && {
+            backgroundColor:
+              theme === "light"
+                ? appColors.btnBgColor.light
+                : appColors.btnBgColor.dark,
+          },
           { transform: [{ scale: scaleValue }] },
         ]}
       >
@@ -83,10 +103,6 @@ const styles = StyleSheet.create({
     marginRight: 10,
     alignItems: "center",
     justifyContent: "center",
-    borderColor: appColors.orange,
-  },
-  checked: {
-    backgroundColor: appColors.orange,
   },
   checkmark: {
     fontSize: 18,

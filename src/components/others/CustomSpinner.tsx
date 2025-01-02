@@ -1,22 +1,31 @@
-import { ActivityIndicator, ColorValue } from "react-native";
-
 import React from "react";
+import { CircleFade, Grid, Wave } from "react-native-animated-spinkit";
 import { useAppConfig } from "../../context";
 import { appColors } from "../../utils";
 
+type AnimationSpinnerType = "wave" | "circleFade" | "grid";
+
 interface IAppSpinner {
-  color?: ColorValue;
+  size?: number;
+  color?: string;
   hasBgColor?: boolean;
-  size?: "small" | "large" | number;
+
+  animationType?: AnimationSpinnerType;
 }
 
 const CustomSpinner = (props: IAppSpinner) => {
   let { color, size } = props;
   const { theme } = useAppConfig();
 
+  const Compo =
+    props.animationType === "circleFade"
+      ? CircleFade
+      : props.animationType === "grid"
+      ? Grid
+      : Wave;
+
   return (
-    <ActivityIndicator
-      animating={true}
+    <Compo
       color={
         color
           ? color
@@ -28,7 +37,7 @@ const CustomSpinner = (props: IAppSpinner) => {
           ? appColors.bg.light
           : appColors.bg.light
       }
-      size={size}
+      size={size ?? 25}
     />
   );
 };

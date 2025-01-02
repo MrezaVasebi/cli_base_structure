@@ -1,17 +1,17 @@
 import React, { Fragment } from "react";
 
-import { StatusBar } from "react-native";
+import { StatusBar, StyleProp, ViewStyle } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { useAppConfig } from "../../context";
 import { appColors } from "../../utils";
-import AppToast, { ToastType } from "./AppToast";
+import AnimatedAppToast, { ToastType } from "./AnimatedAppToast";
 import BodyView from "./BodyView";
 
 interface IRootView {
-  bodyStyle?: {};
   topBgColor?: string;
   bodyBgColor?: string;
   children: React.ReactNode;
+  bodyStyle?: StyleProp<ViewStyle>;
 
   toastType?: ToastType;
   toastMessage?: string;
@@ -45,16 +45,18 @@ const RootView = (props: IRootView) => {
         }}
       >
         <BodyView
-          style={{
-            ...props.bodyStyle,
-            backgroundColor:
-              theme === "light" ? appColors.bg.light : appColors.bg.dark,
-          }}
+          style={[
+            props.bodyStyle,
+            {
+              backgroundColor:
+                theme === "light" ? appColors.bg.light : appColors.bg.dark,
+            },
+          ]}
         >
           {props.children}
         </BodyView>
 
-        <AppToast
+        <AnimatedAppToast
           type={props.toastType ?? "error"}
           message={props.toastMessage ?? ""}
           visible={props.toastVisible ?? false}

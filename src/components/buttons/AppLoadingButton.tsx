@@ -1,7 +1,8 @@
 import React from "react";
 import {
-  ColorValue,
+  StyleProp,
   StyleSheet,
+  TextStyle,
   type TouchableOpacityProps,
 } from "react-native";
 import { CustomSpinner } from "../others";
@@ -11,9 +12,9 @@ import ButtonWrapper from "./ButtonWrapper";
 interface IAppLoadingButton {
   label: string;
   loading: boolean;
-  lblStyle?: object;
-  spinnerColor?: ColorValue;
-  spinnerSize?: number | "small" | "large";
+  spinnerSize?: number;
+  spinnerColor?: string;
+  lblStyle?: StyleProp<TextStyle>;
 }
 
 const AppLoadingButton = (props: IAppLoadingButton & TouchableOpacityProps) => {
@@ -27,14 +28,15 @@ const AppLoadingButton = (props: IAppLoadingButton & TouchableOpacityProps) => {
       {props.loading ? (
         <CustomSpinner
           hasBgColor={true}
-          color={props.spinnerColor}
           size={props.spinnerSize}
+          animationType="circleFade"
+          color={props.spinnerColor}
         />
       ) : (
         <AppText
           hasBgColor
           lbl={props.label}
-          style={{ ...styles.lblStyle, ...props.lblStyle }}
+          style={[styles.lblStyle, props.lblStyle]}
         />
       )}
     </ButtonWrapper>

@@ -11,6 +11,7 @@ import { launchImageLibrary } from "react-native-image-picker";
 import { appImages, DEV_MODE } from "../../utils";
 import { ButtonWrapper } from "../buttons";
 import { AppText } from "../texts";
+import CachedImage from "./CachedImage";
 
 interface IAppAvatar {
   name?: string;
@@ -58,7 +59,7 @@ const AppAvatar = (props: IAppAvatar & TouchableOpacityProps) => {
         style={styles.avatarContainer}
       >
         {uri ? (
-          <Image source={{ uri: uri }} style={styles.imgStyle} />
+          <CachedImage uri={uri} />
         ) : (
           <Image source={appImages.avatar} style={styles.imgStyle} />
         )}

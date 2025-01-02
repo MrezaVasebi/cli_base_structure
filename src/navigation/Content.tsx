@@ -24,16 +24,27 @@ import {
   InputWithClearButton,
   InputWithLabel,
   PriceInput,
+  SearchInput,
   SecureInput,
   SimpleInput,
 } from "../components/inputs";
 import { AppAvatar, AppDivider, RootView } from "../components/others";
-import { ToastType } from "../components/others/AppToast";
+import { ToastType } from "../components/others/AnimatedAppToast";
+import TimerCountDown from "../components/others/TimerCountDown";
 import { AppText } from "../components/texts";
 import { useAppConfig } from "../context";
-import { useOpenCloseModal } from "../hooks";
+import { useOpenCloseModal, useTimerCountDown } from "../hooks";
+import {
+  calculateTimeFromNow,
+  convertGeoDateTimeToShamsiDate,
+  convertGeoDateTimeToShamsiWithMonth,
+  convertGeoDateToShamsiDate,
+  convertShamsiDateToGeoDate,
+  numberWithCommas,
+  storage,
+} from "../modules";
 import { ContentProps } from "../routes";
-import { appColors, iconsName } from "../utils";
+import { appColors, iconsName, STORAGE_KEY } from "../utils";
 
 // import {RouteProp} from '@react-navigation/native';
 // import {StackNavigationProp} from '@react-navigation/stack';
@@ -53,7 +64,7 @@ const Content = (props: ContentProps) => {
 
   // const {title} = useRoute<TestingRouteProp>().params;
 
-  const { theme } = useAppConfig();
+  const { theme, setTheme } = useAppConfig();
 
   const { i18n } = useTranslation();
   const language = i18n.language;
@@ -78,6 +89,7 @@ const Content = (props: ContentProps) => {
   const [showInputs, setShowInputs] = useState<boolean>(false);
   const [showButtons, setShowButtons] = useState<boolean>(false);
   const [showOthers, setShowOthers] = useState<boolean>(false);
+  const [showModules, setShowModules] = useState<boolean>(false);
 
   const [enteredValue, setEnteredValue] = useState<string>("");
   const [secureText, setSecureText] = useState<boolean>(true);
@@ -85,6 +97,12 @@ const Content = (props: ContentProps) => {
   const [msgToast, setMsgToast] = useState<string>("");
   const [typeToast, setTypeToast] = useState<ToastType>("error");
   const [visibleToast, setVisibleToast] = useState<boolean>(false);
+
+  const timer = 60;
+  const { onStartAgain, secondsLeft } = useTimerCountDown({
+    timer,
+    validationValue: true,
+  });
 
   useEffect(() => {
     if (visibleToast) {
@@ -108,13 +126,47 @@ const Content = (props: ContentProps) => {
         }}
       >
         <IconButton
+          style={[
+            styles.langStyle,
+            {
+              ...(language === "fa" ? { left: 20 } : { right: 20 }),
+            },
+          ]}
+          onPress={async () => {
+            await i18n.changeLanguage(i18n.language === "fa" ? "en" : "fa");
+            await storage().storeData(
+              i18n.language === "fa" ? "fa" : "en",
+              STORAGE_KEY.lang_key
+            );
+          }}
+          iconName="language"
+          iconSize={25}
+        />
+
+        <IconButton
+          style={{
+            ...styles.langStyle,
+            ...(language === "fa" ? { left: 70 } : { right: 70 }),
+          }}
+          onPress={async () => {
+            setTheme(theme === "light" ? "dark" : "light");
+            await storage().storeData(
+              theme === "light" ? "dark" : "light",
+              STORAGE_KEY.theme_key
+            );
+          }}
+          iconName={"theme-light-dark"}
+          iconSize={25}
+        />
+
+        {/* <IconButton
           iconSize={25}
           style={{
             ...(language === "fa" ? { marginLeft: 10 } : { marginRight: 10 }),
           }}
           onPress={() => props.navigation.goBack()}
           iconName={i18n.language === "fa" ? "arrowright" : "arrowleft"}
-        />
+        /> */}
         <AppText lbl={props.route.params.title} style={{ fontSize: 20 }} />
       </View>
 
@@ -364,6 +416,15 @@ const Content = (props: ContentProps) => {
               rootStyle={{ marginTop: 20 }}
               onChangeText={(v: string) => setEnteredValue(v)}
             />
+
+            <SearchInput
+              visible
+              lbl="searchItem"
+              value={enteredValue}
+              rootStyle={{ marginTop: 20 }}
+              onPressClear={() => setEnteredValue("")}
+              onChangeText={(v: string) => setEnteredValue(v)}
+            />
           </View>
         ) : null}
 
@@ -394,11 +455,67 @@ const Content = (props: ContentProps) => {
               style={{ marginTop: 20 }}
               onPress={() => {
                 setVisibleToast(true);
-                setTypeToast("success");
-                // setMsgToast("This is a info message");
-                setMsgToast("This is a success message");
-                // setMsgToast("This is an error message");
+                setTypeToast("error");
+                // setMsgToast("thisIsInfoMessage");
+                setMsgToast("thisIsErrorMessage");
+                // setMsgToast("thisIsSuccessMessage");
               }}
+            />
+
+            <TimerCountDown
+              style={{ marginTop: 20 }}
+              secondsLeft={secondsLeft}
+              onPressAgain={onStartAgain}
+            />
+          </View>
+        ) : null}
+
+        <TextButton
+          lbl="modules"
+          lblStyle={{
+            ...styles.itemButton,
+            borderColor:
+              theme === "light" ? appColors.bg.dark : appColors.bg.light,
+          }}
+          onPress={() => setShowModules(!showModules)}
+          style={{ marginBottom: showModules ? 0 : 20 }}
+        />
+        {showModules ? (
+          <View style={{ paddingVertical: 20 }}>
+            <AppText
+              style={{ marginTop: 20 }}
+              lbl={
+                convertGeoDateTimeToShamsiWithMonth(
+                  "2022-04-22T17:18:00.000Z"
+                ) ?? ""
+              }
+            />
+
+            <AppText
+              style={{ marginTop: 20 }}
+              lbl={numberWithCommas("125458965") ?? ""}
+            />
+
+            <AppText
+              style={{ marginTop: 20 }}
+              lbl={
+                convertGeoDateTimeToShamsiDate("2022-04-22T17:18:00.000Z") ?? ""
+              }
+            />
+
+            <AppText
+              style={{ marginTop: 20 }}
+              lbl={convertShamsiDateToGeoDate("1402/1/7")}
+            />
+
+            <AppText
+              style={{ marginTop: 20 }}
+              lbl={convertGeoDateToShamsiDate("2022-08-27 08:38:09") ?? ""}
+            />
+
+            <AppText
+              style={{ marginTop: 20 }}
+              lbl={calculateTimeFromNow(new Date("2024-12-01"))}
             />
           </View>
         ) : null}
@@ -423,8 +540,11 @@ const styles = StyleSheet.create({
     padding: 20,
   },
   itemButton: {
-    fontSize: 25,
+    fontSize: 20,
     paddingBottom: 3,
     borderBottomWidth: 1,
+  },
+  langStyle: {
+    position: "absolute",
   },
 });

@@ -15,7 +15,6 @@ import ButtonWrapper from "./ButtonWrapper";
 interface IIconWithLabelButton {
   label: string;
   iconName: string;
-  iconStyle?: object;
   hasBgColor?: boolean;
   iconSize?: number | undefined;
   lblStyle?: StyleProp<TextStyle>;

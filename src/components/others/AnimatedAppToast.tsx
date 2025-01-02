@@ -1,7 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Animated, Easing, StyleSheet, View } from "react-native";
-import { useAppConfig } from "../../context";
 import { appColors } from "../../utils";
 import { shadowStyle } from "../../utils/constants";
 import { AppText } from "../texts";
@@ -14,8 +13,7 @@ interface IAppToast {
   type?: ToastType;
 }
 
-const AppToast = (props: IAppToast) => {
-  const { theme } = useAppConfig();
+const AnimatedAppToast = (props: IAppToast) => {
   const { i18n } = useTranslation();
 
   const { message, visible, type = "error" } = props;
@@ -92,8 +90,8 @@ const AppToast = (props: IAppToast) => {
           styles.lblStyle,
           {
             ...(i18n.language === "fa"
-              ? { paddingRight: 13 }
-              : { paddingLeft: 13 }),
+              ? { paddingRight: 15 }
+              : { paddingLeft: 15 }),
           },
         ]}
       />
@@ -101,7 +99,7 @@ const AppToast = (props: IAppToast) => {
   );
 };
 
-export default AppToast;
+export default AnimatedAppToast;
 
 const styles = StyleSheet.create({
   rootStyle: {

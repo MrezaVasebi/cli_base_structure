@@ -12,10 +12,11 @@ import {
 import { useFadeAnimation } from "../../hooks";
 import { appColors, iconsName } from "../../utils";
 import { IconButton } from "../buttons";
+import AppIcon from "../others/AppIcon";
 import { AppText } from "../texts";
 import SimpleInput from "./SimpleInput";
 
-interface IInputWithClearButton {
+interface ISearchInput {
   lbl: string;
   visible?: boolean;
   onPressClear: () => void;
@@ -23,9 +24,7 @@ interface IInputWithClearButton {
   rootStyle?: StyleProp<ViewStyle>;
 }
 
-const InputWithClearButton = (
-  props: IInputWithClearButton & TextInputProps
-) => {
+const SearchInput = (props: ISearchInput & TextInputProps) => {
   const { i18n } = useTranslation();
   const { fadeAnim } = useFadeAnimation(props.value);
 
@@ -35,14 +34,25 @@ const InputWithClearButton = (
         <AppText lbl={props.lbl} style={[styles.lblStyle, props.lblStyle]} />
       ) : null}
 
+      <View
+        style={{
+          position: "absolute",
+          bottom: 12,
+          ...(i18n.language === "fa" ? { right: 5 } : { left: 5 }),
+          zIndex: 1,
+        }}
+      >
+        <AppIcon name={iconsName.search} color={appColors.darkGrey} />
+      </View>
+
       <SimpleInput
         value={props.value}
-        style={props.style}
         editable={props.editable}
         maxLength={props.maxLength}
         placeholder={props.placeholder}
         onChangeText={props.onChangeText}
         secureTextEntry={props.secureTextEntry}
+        style={[styles.inputStyle, props.style]}
         placeholderTextColor={props.placeholderTextColor}
       />
 
@@ -65,7 +75,7 @@ const InputWithClearButton = (
   );
 };
 
-export default InputWithClearButton;
+export default SearchInput;
 
 const styles = StyleSheet.create({
   lblStyle: {
@@ -74,5 +84,8 @@ const styles = StyleSheet.create({
   iconStyle: {
     bottom: 7,
     position: "absolute",
+  },
+  inputStyle: {
+    paddingHorizontal: 30,
   },
 });

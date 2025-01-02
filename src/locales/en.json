@@ -19,5 +19,19 @@
   "createAccount": "Create Account",
   "irr": "IRR",
   "noData": "List is empty...",
-  "others":"Others"
+  "others": "Others",
+  "modules": "Modules",
+  "aFewYearsAgo": "a few years ago",
+  "aFewMonthAgo": "a few months ago",
+  "aFewDaysAgo": "a few days ago",
+  "aFewHoursAgo": "a few hours ago",
+  "aFewMinutesAgo": "a few minutes ago",
+  "justNow": "just now",
+  "resendOtpAgain": "Resend OTP again",
+  "sendCodeAfter": "Send code after",
+  "seconds": "seconds",
+  "thisIsInfoMessage": "This is info message",
+  "thisIsErrorMessage": "This is error message",
+  "thisIsSuccessMessage": "This is success message",
+  "searchItem": "Search item"
 }

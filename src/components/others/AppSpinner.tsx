@@ -1,17 +1,22 @@
 import React from "react";
-import { View, Text, StyleSheet, ColorValue } from "react-native";
+import { StyleSheet, View } from "react-native";
 import { CustomSpinner } from "./index.tsx";
 
 interface IAppSpinner {
-  color?: ColorValue;
+  size?: number;
+  color?: string;
   hasBgColor?: boolean;
-  size?: "small" | "large" | number;
 }
 
 const AppSpinner = (props: IAppSpinner) => {
   return (
     <View style={styles.rootStyle}>
-      <CustomSpinner color={props.color} hasBgColor={props.hasBgColor}   size={props.size} />
+      <CustomSpinner
+        size={props.size}
+        color={props.color}
+        animationType="grid"
+        hasBgColor={props.hasBgColor}
+      />
     </View>
   );
 };

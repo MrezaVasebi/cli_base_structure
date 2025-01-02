@@ -1,10 +1,9 @@
 import React from "react";
-import { StyleSheet, View, type ViewProps } from "react-native";
+import { StyleProp, StyleSheet, View, type ViewProps } from "react-native";
 import { appColors, shadowStyle } from "../../utils";
 import ButtonOfTab from "./ButtonOfTab";
 
 interface ITabButton {
-  innerStyle?: {};
   tabName: string;
   lblLeft: string;
   lblRight: string;
@@ -12,12 +11,13 @@ interface ITabButton {
   onPressLeft: () => void;
   onPressRight: () => void;
   onPressCenter: () => void;
+  innerStyle?: StyleProp<ViewProps>;
 }
 
 const ThreeTabButton = (props: ITabButton & ViewProps) => {
   return (
     <View style={[styles.rootStyle, props.style]}>
-      <View style={{ ...styles.innerStyle, ...props.innerStyle }}>
+      <View style={[styles.innerStyle, props.innerStyle]}>
         <ButtonOfTab
           tabCounter="Three"
           tabName={props.tabName}

@@ -19,5 +19,18 @@
   "createAccount": "ایجاد حساب کاربری",
   "irr": "ریال",
   "noData": "لیست خالی می باشد",
-  "others": "سایر"
+  "others": "سایر",
+  "modules": "ماژول های پرکاربرد",
+  "aFewYearsAgo": "چند سال پیش",
+  "aFewMonthAgo": "چند ماه پیش",
+  "aFewDaysAgo": "چند روز پیش",
+  "aFewHoursAgo": "چند ساعت پیش",
+  "aFewMinutesAgo": "چند دقیقه پیش",
+  "justNow": "همین الان",
+  "resendOtpAgain": "ارسال مجدد کد",
+  "seconds": "ثانیه",
+  "sendCodeAfter": "ارسال کد بعد از",
+  "thisIsInfoMessage": "نوتیف اطلاعات",
+  "thisIsErrorMessage": "نوتیف ارور",
+  "thisIsSuccessMessage": "نوتیف موفقیت"
 }

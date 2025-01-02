@@ -26,4 +26,5 @@ export const iconsName = {
   arrowright: "arrowright",
   heart: "heart",
   "theme-light-dark": "theme-light-dark",
+  search: "search",
 };

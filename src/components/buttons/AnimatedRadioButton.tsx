@@ -1,19 +1,28 @@
 import React, { useEffect, useRef } from "react";
-import { Animated, StyleSheet, TouchableOpacityProps } from "react-native";
+import {
+  Animated,
+  StyleProp,
+  StyleSheet,
+  TextStyle,
+  TouchableOpacityProps,
+} from "react-native";
 
+import { useAppConfig } from "../../context";
 import { appColors } from "../../utils";
 import { AppText } from "../texts";
 import ButtonWrapper from "./ButtonWrapper";
 
 interface IAnimatedRadioButton {
   lbl?: string;
-  lblStyle?: object;
   isSelected: boolean;
+  lblStyle?: StyleProp<TextStyle>;
 }
 
 const AnimatedRadioButton = (
   props: TouchableOpacityProps & IAnimatedRadioButton
 ) => {
+  const { theme } = useAppConfig();
+
   const outerScale = useRef(new Animated.Value(1)).current; // Outer circle bounce
   const innerScale = useRef(
     new Animated.Value(props.isSelected ? 1 : 0)
@@ -61,13 +70,25 @@ const AnimatedRadioButton = (
       <Animated.View
         style={[
           styles.radioOuterCircle,
-          { transform: [{ scale: outerScale }] },
+          {
+            transform: [{ scale: outerScale }],
+            borderColor:
+              theme === "light"
+                ? appColors.btnBgColor.light
+                : appColors.btnBgColor.dark,
+          },
         ]}
       >
         <Animated.View
           style={[
             styles.radioInnerCircle,
-            { transform: [{ scale: innerScale }] },
+            {
+              transform: [{ scale: innerScale }],
+              backgroundColor:
+                theme === "light"
+                  ? appColors.btnBgColor.light
+                  : appColors.btnBgColor.dark,
+            },
           ]}
         />
       </Animated.View>
@@ -89,13 +110,11 @@ const styles = StyleSheet.create({
     borderRadius: 15,
     alignItems: "center",
     justifyContent: "center",
-    borderColor: appColors.orange,
   },
   radioInnerCircle: {
     width: 16,
     height: 16,
     borderRadius: 8,
-    backgroundColor: appColors.orange,
   },
 });
 

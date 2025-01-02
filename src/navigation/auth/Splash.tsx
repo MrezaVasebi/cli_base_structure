@@ -1,7 +1,7 @@
-import { IconButton, SimpleButton } from "../../components/buttons";
+import { IconButton } from "../../components/buttons";
 import { ROUTES, SplashProps } from "../../routes";
 
-import React from "react";
+import React, { useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { StyleSheet } from "react-native";
 import { RootView } from "../../components/others";
@@ -20,49 +20,21 @@ const Splash = (props: SplashProps) => {
   const { theme, setTheme } = useAppConfig();
   const { i18n } = useTranslation();
 
+  useEffect(() => {
+    setTimeout(() => {
+      props.navigation.navigate(ROUTES.Content, {
+        title: "content",
+      });
+    }, 5000);
+  }, []);
+
   return (
     <RootView
       bodyStyle={{
         ...styles.rootStyle,
       }}
     >
-      <IconButton
-        style={styles.langStyle}
-        onPress={async () => {
-          await i18n.changeLanguage(i18n.language === "fa" ? "en" : "fa");
-          await storage().storeData(
-            i18n.language === "fa" ? "fa" : "en",
-            STORAGE_KEY.lang_key
-          );
-        }}
-        iconName="language"
-        iconSize={25}
-      />
-
-      <IconButton
-        style={{ ...styles.langStyle, left: 70 }}
-        onPress={async () => {
-          setTheme(theme === "light" ? "dark" : "light");
-          await storage().storeData(
-            theme === "light" ? "dark" : "light",
-            STORAGE_KEY.theme_key
-          );
-        }}
-        iconName={"theme-light-dark"}
-        iconSize={25}
-      />
-
       <AppText lbl={"appDescription"} style={styles.descStyle} />
-
-      <SimpleButton
-        lbl={"gotToSeeContent"}
-        onPress={() =>
-          props.navigation.navigate(ROUTES.Content, {
-            title: "content",
-          })
-        }
-        style={{ paddingHorizontal: 15, marginTop: 20 }}
-      />
     </RootView>
   );
 };
@@ -76,7 +48,7 @@ const styles = StyleSheet.create({
   },
   descStyle: {
     fontSize: 14,
-    lineHeight: 25,
+    lineHeight: 30,
   },
   langStyle: {
     top: 20,

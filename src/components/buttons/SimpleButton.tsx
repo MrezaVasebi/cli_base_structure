@@ -1,4 +1,9 @@
-import { StyleSheet, TouchableOpacityProps } from "react-native";
+import {
+  StyleProp,
+  StyleSheet,
+  TextStyle,
+  TouchableOpacityProps,
+} from "react-native";
 
 import React from "react";
 import { AppText } from "../texts";
@@ -6,7 +11,7 @@ import ButtonWrapper from "./ButtonWrapper";
 
 interface ISimpleButton {
   lbl: string;
-  lblStyle?: object;
+  lblStyle?: StyleProp<TextStyle>;
 }
 
 const SimpleButton = (props: TouchableOpacityProps & ISimpleButton) => {

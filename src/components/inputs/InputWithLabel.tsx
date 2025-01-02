@@ -12,8 +12,8 @@ import SimpleInput from "./SimpleInput";
 
 interface IInputWithLabel {
   lbl: string;
-  rootStyle?: StyleProp<ViewStyle>;
   lblStyle?: StyleProp<TextStyle>;
+  rootStyle?: StyleProp<ViewStyle>;
 }
 
 const InputWithLabel = (props: IInputWithLabel & TextInputProps) => {

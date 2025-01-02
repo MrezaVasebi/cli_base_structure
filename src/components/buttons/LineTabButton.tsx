@@ -1,5 +1,6 @@
 import React from "react";
 import {
+  StyleProp,
   StyleSheet,
   type TouchableOpacityProps,
   View,
@@ -14,10 +15,10 @@ interface ILineTabButton {
   tabName: string;
   lblLeft: string;
   lblRight: string;
-  btnStyleLeft?: object;
-  btnStyleRight?: object;
   onPressLeft: () => void;
   onPressRight: () => void;
+  btnStyleLeft?: StyleProp<ViewProps>;
+  btnStyleRight?: StyleProp<ViewProps>;
 }
 
 interface IBtn {
@@ -80,7 +81,7 @@ const styles = StyleSheet.create({
     height: 45,
     flexDirection: "row",
     borderBottomWidth: 1,
-    borderBottomColor: appColors.darkGrey
+    borderBottomColor: appColors.darkGrey,
   },
   btnStyle: {
     bottom: -1,
