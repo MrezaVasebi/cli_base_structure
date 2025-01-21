@@ -13,8 +13,7 @@ import Content from "../Content";
 const Stack = createStackNavigator<RootStackParams>();
 
 function FinalNav() {
-  const { theme } = useAppConfig();
-  const { hasNetwork } = useAppConfig();
+  const { theme, hasNetwork } = useAppConfig();
 
   if (!hasNetwork) return <NoNetwork status={hasNetwork} />;
 

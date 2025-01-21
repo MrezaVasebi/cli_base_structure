@@ -1,11 +1,11 @@
 import axios, { AxiosRequestConfig } from "axios";
 import { useState } from "react";
-import { headers, MethodTypeEnum, uploadHeader } from "../services/network";
+import { fileHeader, headers, MethodTypeEnum } from "../services/network";
 import { DEV_MODE } from "../utils";
 
 type HeaderType = "normal" | "image";
 
-type onCallApiProps = {
+type onInvokeApiAsyncProps = {
   data: any;
   url: string;
   method: MethodTypeEnum;
@@ -15,7 +15,7 @@ type onCallApiProps = {
 export const useApi = () => {
   const [loading, setLoading] = useState<boolean>(false);
 
-  const onInvokeApi = async <T>(props: Partial<onCallApiProps>) => {
+  const onInvokeApiAsync = async <T>(props: Partial<onInvokeApiAsyncProps>) => {
     setLoading(true);
 
     let config: AxiosRequestConfig = {
@@ -25,7 +25,7 @@ export const useApi = () => {
       headers: {
         ...(props.headerType === "normal" || !props.headerType
           ? headers
-          : uploadHeader),
+          : fileHeader),
       },
     };
 
@@ -64,6 +64,6 @@ export const useApi = () => {
 
   return {
     loading,
-    onInvokeApi,
+    onInvokeApi: onInvokeApiAsync,
   };
 };

@@ -3,7 +3,7 @@ export const headers = {
   "Content-Type": "application/json",
 };
 
-export const uploadHeader = {
+export const fileHeader = {
   Accept: "application/json",
   "Content-Type": "multipart/form-data",
 };

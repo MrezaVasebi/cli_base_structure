@@ -38,8 +38,10 @@ export const AppConfigProvider = (props: IAppConfigProvider) => {
   const [theme, setTheme] = useState<ThemeType>("light");
 
   useEffect(() => {
+    // check platform
     setIsAndroid(Platform.OS === "android");
 
+    // check connection
     const checkConnection = async () => {
       const state = await NetInfo.fetch();
       setHasNetwork(state.isConnected);
@@ -51,14 +53,14 @@ export const AppConfigProvider = (props: IAppConfigProvider) => {
     });
 
     // get theme
-    getTheme();
+    getThemeAsync();
 
     return () => {
       unsubscribe();
     };
   }, []);
 
-  const getTheme = async () => {
+  const getThemeAsync = async () => {
     await storage<ThemeType>()
       .readData(STORAGE_KEY.theme_key)
       .then((res) => {
