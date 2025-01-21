@@ -14,7 +14,7 @@ interface IAppText {
 const AppText = (props: IAppText & TextProps) => {
   const { theme } = useAppConfig();
   const { t, i18n } = useTranslation();
-  const lang = i18n.language;
+  const lang = i18n.language === "fa";
 
   return (
     <Text
@@ -31,8 +31,8 @@ const AppText = (props: IAppText & TextProps) => {
             ? appColors.txtColor.light
             : appColors.txtColor.light,
 
-          fontFamily: lang === "fa" ? appFonts.fa : appFonts.en,
-          textAlign: lang === "fa" ? "right" : "justify",
+          textAlign: lang ? "left" : "right",
+          fontFamily: lang ? appFonts.fa : appFonts.en,
         },
         props.style,
       ]}

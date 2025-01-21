@@ -7,6 +7,7 @@ import {
   TouchableOpacityProps,
 } from "react-native";
 
+import { useTranslation } from "react-i18next";
 import { useAppConfig } from "../../context";
 import { appColors } from "../../utils";
 import { AppText } from "../texts";
@@ -22,6 +23,7 @@ const AnimatedRadioButton = (
   props: TouchableOpacityProps & IAnimatedRadioButton
 ) => {
   const { theme } = useAppConfig();
+  const { i18n } = useTranslation();
 
   const outerScale = useRef(new Animated.Value(1)).current; // Outer circle bounce
   const innerScale = useRef(
@@ -63,7 +65,13 @@ const AnimatedRadioButton = (
   return (
     <ButtonWrapper
       onPress={props.onPress}
-      style={[styles.rootStyle, props.style]}
+      style={[
+        styles.rootStyle,
+        {
+          flexDirection: i18n.language === "fa" ? "row-reverse" : "row",
+        },
+        props.style,
+      ]}
     >
       <AppText lbl={props.lbl} style={props.lblStyle} />
 
@@ -76,6 +84,9 @@ const AnimatedRadioButton = (
               theme === "light"
                 ? appColors.btnBgColor.light
                 : appColors.btnBgColor.dark,
+            ...(i18n.language === "fa"
+              ? { marginRight: 10 }
+              : { marginLeft: 10 }),
           },
         ]}
       >
@@ -100,13 +111,11 @@ const styles = StyleSheet.create({
   rootStyle: {
     alignItems: "center",
     justifyContent: "flex-end",
-    flexDirection: "row-reverse",
   },
   radioOuterCircle: {
     width: 28,
     height: 28,
     borderWidth: 2,
-    marginRight: 10,
     borderRadius: 15,
     alignItems: "center",
     justifyContent: "center",

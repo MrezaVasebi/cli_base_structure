@@ -1,4 +1,5 @@
 import React from "react";
+import { useTranslation } from "react-i18next";
 import {
   OpaqueColorValue,
   StyleProp,
@@ -25,18 +26,32 @@ const IconWithLabelButton = (
   props: IIconWithLabelButton & TouchableOpacityProps
 ) => {
   const { theme } = useAppConfig();
+  const { i18n } = useTranslation();
 
   return (
     <ButtonWrapper
       onPress={props.onPress}
       disabled={props.disabled}
       hasBgColor={props.hasBgColor}
-      style={[styles.rootStyle, props.style]}
+      style={[
+        styles.rootStyle,
+        {
+          flexDirection: i18n.language === "fa" ? "row-reverse" : "row",
+        },
+        props.style,
+      ]}
     >
       <AppText
         hasBgColor
         lbl={props.label}
-        style={[styles.lblStyle, props.lblStyle]}
+        style={[
+          {
+            ...(i18n.language === "fa"
+              ? { marginLeft: 10 }
+              : { marginRight: 10 }),
+          },
+          props.lblStyle,
+        ]}
       />
 
       <AppIcon
@@ -61,9 +76,5 @@ const styles = StyleSheet.create({
     borderRadius: 5,
     alignItems: "center",
     justifyContent: "center",
-    flexDirection: "row-reverse",
-  },
-  lblStyle: {
-    marginLeft: 10,
   },
 });

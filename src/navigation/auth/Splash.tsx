@@ -1,14 +1,9 @@
-import { IconButton } from "../../components/buttons";
 import { ROUTES, SplashProps } from "../../routes";
 
 import React, { useEffect } from "react";
-import { useTranslation } from "react-i18next";
 import { StyleSheet } from "react-native";
 import { RootView } from "../../components/others";
 import { AppText } from "../../components/texts";
-import { useAppConfig } from "../../context";
-import { storage } from "../../modules/storage.ts";
-import { STORAGE_KEY } from "../../utils";
 
 // import {StackNavigationProp} from '@react-navigation/stack';
 
@@ -16,9 +11,6 @@ import { STORAGE_KEY } from "../../utils";
 
 const Splash = (props: SplashProps) => {
   // const navigation: NavigationProp<ParamListBase> = useNavigation<SplashProp>();
-
-  const { theme, setTheme } = useAppConfig();
-  const { i18n } = useTranslation();
 
   useEffect(() => {
     setTimeout(() => {
@@ -49,10 +41,5 @@ const styles = StyleSheet.create({
   descStyle: {
     fontSize: 14,
     lineHeight: 30,
-  },
-  langStyle: {
-    top: 20,
-    left: 20,
-    position: "absolute",
   },
 });

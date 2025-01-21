@@ -23,6 +23,7 @@ interface IPriceInput {
 
 const PriceInput = (props: TextInputMaskProps & IPriceInput) => {
   const { i18n, t } = useTranslation();
+  const language = i18n.language === "fa";
 
   return (
     <View style={[props.rootStyle]}>
@@ -38,9 +39,7 @@ const PriceInput = (props: TextInputMaskProps & IPriceInput) => {
           borderRadius: 5,
           flexDirection: "row",
           alignItems: "center",
-          ...(i18n.language === "fa"
-            ? { paddingRight: 10 }
-            : { paddingLeft: 10 }),
+          ...(language ? { paddingLeft: 5 } : { paddingRight: 5 }),
           backgroundColor: appColors.white,
           ...shadowStyle,
         }}
@@ -50,7 +49,7 @@ const PriceInput = (props: TextInputMaskProps & IPriceInput) => {
           style={{
             color: appColors.black,
             position: "absolute",
-            ...(i18n.language === "fa" ? { left: 10 } : { right: 10 }),
+            ...(language ? { right: 10 } : { left: 10 }),
           }}
         />
 
@@ -65,8 +64,8 @@ const PriceInput = (props: TextInputMaskProps & IPriceInput) => {
           style={[
             styles.inputStyle,
             {
-              textAlign: i18n.language === "fa" ? "right" : "left",
-              fontFamily: i18n.language === "fa" ? appFonts.fa : appFonts.en,
+              textAlign: language ? "right" : "left",
+              fontFamily: language ? appFonts.fa : appFonts.en,
             },
             props.style,
           ]}

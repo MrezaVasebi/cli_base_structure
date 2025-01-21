@@ -37,7 +37,7 @@ const AppAvatar = (props: IAppAvatar & TouchableOpacityProps) => {
         if (res.didCancel || res.errorMessage) return;
         if (res && res.assets && res.assets?.length !== 0) {
           const { uri, fileName } = res.assets[0];
-          if (res.assets[0] && uri && fileName) {
+          if (uri && fileName) {
             setUri(uri);
             props.returnUriAndFileName({ uri, fileName });
           }

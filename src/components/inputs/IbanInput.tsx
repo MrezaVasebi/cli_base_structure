@@ -32,7 +32,10 @@ const IbanInput = (props: TextInputMaskProps & IIbanInput) => {
       ) : null}
 
       <View style={[styles.ibanContainer]}>
-        <AppText lbl="IR" style={styles.unitStyle} />
+        <AppText
+          lbl="IR"
+          style={{ ...styles.unitStyle, position: "absolute", right: 5 }}
+        />
 
         <TextInputMask
           type={"custom"}

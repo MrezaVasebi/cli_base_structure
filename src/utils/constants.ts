@@ -27,4 +27,5 @@ export const iconsName = {
   heart: "heart",
   "theme-light-dark": "theme-light-dark",
   search: "search",
+  exit: "exit",
 };

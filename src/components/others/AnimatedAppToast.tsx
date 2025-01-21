@@ -79,7 +79,7 @@ const AnimatedAppToast = (props: IAppToast) => {
       <View
         style={{
           ...styles.sideStyle,
-          ...(i18n.language === "fa" ? { right: 0 } : { left: 0 }),
+          ...(i18n.language === "fa" ? { left: 0 } : { right: 0 }),
           backgroundColor: sideBgcolor(),
         }}
       />
@@ -90,8 +90,8 @@ const AnimatedAppToast = (props: IAppToast) => {
           styles.lblStyle,
           {
             ...(i18n.language === "fa"
-              ? { paddingRight: 15 }
-              : { paddingLeft: 15 }),
+              ? { paddingLeft: 15 }
+              : { paddingRight: 15 }),
           },
         ]}
       />

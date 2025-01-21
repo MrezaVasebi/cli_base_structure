@@ -138,7 +138,7 @@ export const convertGeoDateToShamsiDate = (date: string) => {
   return moment(date, "YYYY-MM-DD").locale("fa").format("YYYY/MM/DD");
 };
 
-export const calculateTimeFromNow = (timestamp: Date) => {
+export const fromNow = (timestamp: Date) => {
   // input: new Date("2023-02-01")
 
   const now = new Date();
@@ -211,7 +211,7 @@ export const enDigit = (number: string) => {
     : "";
 };
 
-// convert number to farsi digit
+// convert number to persian digit
 export const faDigit = (number: string) => {
   return number ? number.replace(/\d/g, (d) => "۰۱۲۳۴۵۶۷۸۹"[+d]) : "";
 };
@@ -282,6 +282,7 @@ export const includesNumber = (password: string) => {
   return password.match(/\d/) ? true : false;
 };
 
+// exit the application
 export const exitApplication = () => {
   RNExitApp.exitApp();
 };

@@ -26,6 +26,7 @@ interface ISearchInput {
 
 const SearchInput = (props: ISearchInput & TextInputProps) => {
   const { i18n } = useTranslation();
+  const language = i18n.language === "fa";
   const { fadeAnim } = useFadeAnimation(props.value);
 
   return (
@@ -38,7 +39,7 @@ const SearchInput = (props: ISearchInput & TextInputProps) => {
         style={{
           position: "absolute",
           bottom: 12,
-          ...(i18n.language === "fa" ? { right: 5 } : { left: 5 }),
+          ...(language ? { left: 5 } : { right: 5 }),
           zIndex: 1,
         }}
       >

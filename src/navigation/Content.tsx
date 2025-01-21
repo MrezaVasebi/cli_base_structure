@@ -33,16 +33,8 @@ import { ToastType } from "../components/others/AnimatedAppToast";
 import TimerCountDown from "../components/others/TimerCountDown";
 import { AppText } from "../components/texts";
 import { useAppConfig } from "../context";
-import { useOpenCloseModal, useTimerCountDown } from "../hooks";
-import {
-  calculateTimeFromNow,
-  convertGeoDateTimeToShamsiDate,
-  convertGeoDateTimeToShamsiWithMonth,
-  convertGeoDateToShamsiDate,
-  convertShamsiDateToGeoDate,
-  numberWithCommas,
-  storage,
-} from "../modules";
+import { useApi, useOpenCloseModal, useTimerCountDown } from "../hooks";
+import { exitApplication, storage } from "../modules";
 import { ContentProps } from "../routes";
 import { appColors, iconsName, STORAGE_KEY } from "../utils";
 
@@ -64,10 +56,11 @@ const Content = (props: ContentProps) => {
 
   // const {title} = useRoute<TestingRouteProp>().params;
 
+  const { loading, onInvokeApi } = useApi();
   const { theme, setTheme } = useAppConfig();
 
   const { i18n } = useTranslation();
-  const language = i18n.language;
+  const language = i18n.language === "fa";
 
   const [check, setCheck] = useState<boolean>(false);
   const [loadingBtn, setLoadingBtn] = useState<boolean>(false);
@@ -89,7 +82,6 @@ const Content = (props: ContentProps) => {
   const [showInputs, setShowInputs] = useState<boolean>(false);
   const [showButtons, setShowButtons] = useState<boolean>(false);
   const [showOthers, setShowOthers] = useState<boolean>(false);
-  const [showModules, setShowModules] = useState<boolean>(false);
 
   const [enteredValue, setEnteredValue] = useState<string>("");
   const [secureText, setSecureText] = useState<boolean>(true);
@@ -122,31 +114,42 @@ const Content = (props: ContentProps) => {
       <View
         style={{
           ...styles.titleContainer,
-          flexDirection: language === "fa" ? "row-reverse" : "row",
+          flexDirection: language ? "row" : "row-reverse",
         }}
       >
         <IconButton
+          style={{
+            ...styles.langStyle,
+            ...(language
+              ? { transform: [{ rotate: "180deg" }] }
+              : { transform: [{ rotate: "0deg" }] }),
+            ...(language ? { right: 20 } : { left: 20 }),
+          }}
+          iconSize={28}
+          onPress={exitApplication}
+          iconName={iconsName["exit"]}
+        />
+
+        <IconButton
           style={[
             styles.langStyle,
-            {
-              ...(language === "fa" ? { left: 20 } : { right: 20 }),
-            },
+            { ...(language ? { right: 70 } : { left: 70 }) },
           ]}
           onPress={async () => {
-            await i18n.changeLanguage(i18n.language === "fa" ? "en" : "fa");
+            await i18n.changeLanguage(language ? "en" : "fa");
             await storage().storeData(
-              i18n.language === "fa" ? "fa" : "en",
+              language ? "fa" : "en",
               STORAGE_KEY.lang_key
             );
           }}
-          iconName="language"
+          iconName={iconsName.language}
           iconSize={25}
         />
 
         <IconButton
           style={{
             ...styles.langStyle,
-            ...(language === "fa" ? { left: 70 } : { right: 70 }),
+            ...(language ? { right: 120 } : { left: 120 }),
           }}
           onPress={async () => {
             setTheme(theme === "light" ? "dark" : "light");
@@ -155,17 +158,17 @@ const Content = (props: ContentProps) => {
               STORAGE_KEY.theme_key
             );
           }}
-          iconName={"theme-light-dark"}
+          iconName={iconsName["theme-light-dark"]}
           iconSize={25}
         />
 
         {/* <IconButton
           iconSize={25}
           style={{
-            ...(language === "fa" ? { marginLeft: 10 } : { marginRight: 10 }),
+            ...(language  ? { marginLeft: 10 } : { marginRight: 10 }),
           }}
           onPress={() => props.navigation.goBack()}
-          iconName={i18n.language === "fa" ? "arrowright" : "arrowleft"}
+          iconName={i18n.language  ? "arrowright" : "arrowleft"}
         /> */}
         <AppText lbl={props.route.params.title} style={{ fontSize: 20 }} />
       </View>
@@ -186,7 +189,12 @@ const Content = (props: ContentProps) => {
         />
 
         {showButtons && (
-          <View style={{ paddingVertical: 20 }}>
+          <View
+            style={{
+              paddingVertical: 20,
+              alignItems: i18n.language === "en" ? "flex-end" : "flex-start",
+            }}
+          >
             <AnimatedCheckBox
               isChecked={check}
               lbl="Animated CheckBox"
@@ -226,7 +234,7 @@ const Content = (props: ContentProps) => {
             <IconButtonWithLabel
               hasBgColor
               iconSize={25}
-              label="Language"
+              label="language"
               style={{ marginTop: 20 }}
               lblStyle={{ fontSize: 15 }}
               iconName={iconsName.language}
@@ -258,13 +266,7 @@ const Content = (props: ContentProps) => {
               style={{ marginTop: 20 }}
             />
 
-            <View
-              style={{
-                marginTop: 20,
-                alignItems: "center",
-                justifyContent: "center",
-              }}
-            >
+            <View style={styles.textBtnContainer}>
               <TextButton onPress={() => {}} lbl={"createAccount"} />
             </View>
 
@@ -295,9 +297,9 @@ const Content = (props: ContentProps) => {
               showModal={itemModal}
               label={"chooseAnItem"}
               showCloseBtnModal={true}
-              style={{ marginTop: 20 }}
               modalTitle={"chooseAnItem"}
               modalAnimation={modalAnimation}
+              style={{ marginTop: 20, width:'100%' }}
               onPressShowModal={() => {
                 openModal(() => setItemModal(true));
               }}
@@ -469,56 +471,6 @@ const Content = (props: ContentProps) => {
             />
           </View>
         ) : null}
-
-        <TextButton
-          lbl="modules"
-          lblStyle={{
-            ...styles.itemButton,
-            borderColor:
-              theme === "light" ? appColors.bg.dark : appColors.bg.light,
-          }}
-          onPress={() => setShowModules(!showModules)}
-          style={{ marginBottom: showModules ? 0 : 20 }}
-        />
-        {showModules ? (
-          <View style={{ paddingVertical: 20 }}>
-            <AppText
-              style={{ marginTop: 20 }}
-              lbl={
-                convertGeoDateTimeToShamsiWithMonth(
-                  "2022-04-22T17:18:00.000Z"
-                ) ?? ""
-              }
-            />
-
-            <AppText
-              style={{ marginTop: 20 }}
-              lbl={numberWithCommas("125458965") ?? ""}
-            />
-
-            <AppText
-              style={{ marginTop: 20 }}
-              lbl={
-                convertGeoDateTimeToShamsiDate("2022-04-22T17:18:00.000Z") ?? ""
-              }
-            />
-
-            <AppText
-              style={{ marginTop: 20 }}
-              lbl={convertShamsiDateToGeoDate("1402/1/7")}
-            />
-
-            <AppText
-              style={{ marginTop: 20 }}
-              lbl={convertGeoDateToShamsiDate("2022-08-27 08:38:09") ?? ""}
-            />
-
-            <AppText
-              style={{ marginTop: 20 }}
-              lbl={calculateTimeFromNow(new Date("2024-12-01"))}
-            />
-          </View>
-        ) : null}
       </ScrollView>
     </RootView>
   );
@@ -546,5 +498,11 @@ const styles = StyleSheet.create({
   },
   langStyle: {
     position: "absolute",
+  },
+  textBtnContainer: {
+    width: "100%",
+    marginTop: 20,
+    alignItems: "center",
+    justifyContent: "center",
   },
 });

@@ -1,4 +1,5 @@
 import React from "react";
+import { useTranslation } from "react-i18next";
 import { StyleProp, StyleSheet, View, type ViewProps } from "react-native";
 import { appColors, shadowStyle } from "../../utils";
 import ButtonOfTab from "./ButtonOfTab";
@@ -15,9 +16,17 @@ interface ITabButton {
 }
 
 const ThreeTabButton = (props: ITabButton & ViewProps) => {
+  const { i18n } = useTranslation();
+
   return (
     <View style={[styles.rootStyle, props.style]}>
-      <View style={[styles.innerStyle, props.innerStyle]}>
+      <View
+        style={[
+          styles.innerStyle,
+          { flexDirection: i18n.language === "fa" ? "row-reverse" : "row" },
+          props.innerStyle,
+        ]}
+      >
         <ButtonOfTab
           tabCounter="Three"
           tabName={props.tabName}
@@ -72,7 +81,6 @@ const styles = StyleSheet.create({
     padding: 1,
     borderRadius: 45,
     overflow: "hidden",
-    flexDirection: "row",
     alignItems: "center",
     justifyContent: "space-between",
     backgroundColor: appColors.white,

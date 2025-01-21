@@ -33,5 +33,7 @@
   "thisIsInfoMessage": "This is info message",
   "thisIsErrorMessage": "This is error message",
   "thisIsSuccessMessage": "This is success message",
-  "searchItem": "Search item"
+  "searchItem": "Search item",
+  "language": "Language",
+  "errorInServer": "Error in server"
 }

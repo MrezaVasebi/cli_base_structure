@@ -7,6 +7,7 @@ import {
   TouchableOpacityProps,
 } from "react-native";
 
+import { useTranslation } from "react-i18next";
 import { useAppConfig } from "../../context";
 import { appColors } from "../../utils";
 import { AppText } from "../texts";
@@ -20,6 +21,7 @@ interface IAnimatedCheckBox {
 
 const AnimatedCheckBox = (props: TouchableOpacityProps & IAnimatedCheckBox) => {
   const { theme } = useAppConfig();
+  const { i18n } = useTranslation();
 
   const scaleValue = useRef(new Animated.Value(1)).current; // For scaling animation
   const fadeValue = useRef(new Animated.Value(0)).current; // For fading the checkmark
@@ -59,7 +61,13 @@ const AnimatedCheckBox = (props: TouchableOpacityProps & IAnimatedCheckBox) => {
   return (
     <ButtonWrapper
       onPress={props.onPress}
-      style={[styles.rootStyle, props.style]}
+      style={[
+        styles.rootStyle,
+        {
+          flexDirection: i18n.language === "fa" ? "row-reverse" : "row",
+        },
+        props.style,
+      ]}
     >
       <AppText lbl={props.lbl} style={props.lblStyle} />
 
@@ -71,6 +79,10 @@ const AnimatedCheckBox = (props: TouchableOpacityProps & IAnimatedCheckBox) => {
               theme === "light"
                 ? appColors.btnBgColor.light
                 : appColors.btnBgColor.dark,
+            transform: [{ scale: scaleValue }],
+            ...(i18n.language === "fa"
+              ? { marginRight: 10 }
+              : { marginLeft: 10 }),
           },
           props.isChecked && {
             backgroundColor:
@@ -78,7 +90,6 @@ const AnimatedCheckBox = (props: TouchableOpacityProps & IAnimatedCheckBox) => {
                 ? appColors.btnBgColor.light
                 : appColors.btnBgColor.dark,
           },
-          { transform: [{ scale: scaleValue }] },
         ]}
       >
         <Animated.Text style={[styles.checkmark, { opacity: fadeValue }]}>
@@ -93,14 +104,12 @@ const styles = StyleSheet.create({
   rootStyle: {
     alignItems: "center",
     justifyContent: "flex-end",
-    flexDirection: "row-reverse",
   },
   checkbox: {
     width: 28,
     height: 28,
     borderWidth: 2,
     borderRadius: 5,
-    marginRight: 10,
     alignItems: "center",
     justifyContent: "center",
   },

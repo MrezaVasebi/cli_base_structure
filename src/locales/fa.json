@@ -32,5 +32,8 @@
   "sendCodeAfter": "ارسال کد بعد از",
   "thisIsInfoMessage": "نوتیف اطلاعات",
   "thisIsErrorMessage": "نوتیف ارور",
-  "thisIsSuccessMessage": "نوتیف موفقیت"
+  "thisIsSuccessMessage": "نوتیف موفقیت",
+  "searchItem": "جستجوی ایتم",
+  "language": "زبان",
+  "errorInServer": "خطایی در سرور رخ داده است"
 }

@@ -12,7 +12,7 @@ const SwitchButton = (props: ISwitchButton & TouchableOpacityProps) => {
   const { theme } = useAppConfig();
 
   const translateX = useRef(
-    new Animated.Value(props.isSelected ? 33 : 5)
+    new Animated.Value(props.isSelected ? -33 : -5)
   ).current;
 
   const backgroundColor = useRef(
@@ -22,7 +22,7 @@ const SwitchButton = (props: ISwitchButton & TouchableOpacityProps) => {
   useEffect(() => {
     // Animate the circle's position
     Animated.timing(translateX, {
-      toValue: props.isSelected ? 33 : 5,
+      toValue: props.isSelected ? -33 : -5,
       duration: 150,
       useNativeDriver: true,
     }).start();

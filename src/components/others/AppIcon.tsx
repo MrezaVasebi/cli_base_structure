@@ -24,6 +24,9 @@ const AppIcon = ({ name, size, color }: IAppIcon) => {
 
   const handleIcons = () => {
     switch (name) {
+      case iconsName.exit: {
+        return <Ionicons name={name} color={defaultColor} size={defaultSize} />;
+      }
       case iconsName.search: {
         return <Ionicons name={name} color={defaultColor} size={defaultSize} />;
       }
