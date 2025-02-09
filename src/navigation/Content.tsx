@@ -60,7 +60,7 @@ const Content = (props: ContentProps) => {
   const { theme, setTheme } = useAppConfig();
 
   const { i18n } = useTranslation();
-  const language = i18n.language === "fa";
+  const isFaLanguage = i18n.language === "fa";
 
   const [check, setCheck] = useState<boolean>(false);
   const [loadingBtn, setLoadingBtn] = useState<boolean>(false);
@@ -114,16 +114,16 @@ const Content = (props: ContentProps) => {
       <View
         style={{
           ...styles.titleContainer,
-          flexDirection: language ? "row" : "row-reverse",
+          flexDirection: isFaLanguage ? "row" : "row-reverse",
         }}
       >
         <IconButton
           style={{
             ...styles.langStyle,
-            ...(language
+            ...(isFaLanguage
               ? { transform: [{ rotate: "180deg" }] }
               : { transform: [{ rotate: "0deg" }] }),
-            ...(language ? { right: 20 } : { left: 20 }),
+            ...(isFaLanguage ? { right: 20 } : { left: 20 }),
           }}
           iconSize={28}
           onPress={exitApplication}
@@ -133,12 +133,12 @@ const Content = (props: ContentProps) => {
         <IconButton
           style={[
             styles.langStyle,
-            { ...(language ? { right: 70 } : { left: 70 }) },
+            { ...(isFaLanguage ? { right: 70 } : { left: 70 }) },
           ]}
           onPress={async () => {
-            await i18n.changeLanguage(language ? "en" : "fa");
+            await i18n.changeLanguage(isFaLanguage ? "en" : "fa");
             await storage().storeData(
-              language ? "fa" : "en",
+              isFaLanguage ? "en" : "fa",
               STORAGE_KEY.lang_key
             );
           }}
@@ -149,7 +149,7 @@ const Content = (props: ContentProps) => {
         <IconButton
           style={{
             ...styles.langStyle,
-            ...(language ? { right: 120 } : { left: 120 }),
+            ...(isFaLanguage ? { right: 120 } : { left: 120 }),
           }}
           onPress={async () => {
             setTheme(theme === "light" ? "dark" : "light");
