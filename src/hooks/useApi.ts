@@ -46,24 +46,22 @@ export const useApi = () => {
   };
 
   const errMsgByCode = (errorCode: number): string => {
-    let msg: string;
     switch (errorCode) {
       case 500:
-        msg = "";
+        return "Internal server error";
       case 401:
-        msg = "";
+        return "Unauthorized access";
       case 403:
-        msg = "";
+        return "Forbidden access";
       case 422:
-        msg = "";
+        return "Unprocessable entity";
       default:
-        msg = "errorInServer";
+        return "An error occurred on the server";
     }
-    return msg;
   };
 
   return {
     loading,
-    onInvokeApi: onInvokeApiAsync,
+    onInvokeApiAsync,
   };
 };

@@ -5,9 +5,9 @@ import CustomSpinner from "./CustomSpinner";
 import NoData from "./NoData";
 
 interface IApiComponent {
-  data: any[];
   error: string;
   loading: boolean;
+  data: any[] | object;
 }
 
 const ApiComponent = (props: IApiComponent & ViewProps) => {
@@ -19,7 +19,11 @@ const ApiComponent = (props: IApiComponent & ViewProps) => {
         <View style={styles.container}>
           <AppText lbl={props.error} />
         </View>
-      ) : props.data && props.data.length === 0 ? (
+      ) : (props.data &&
+          Array.isArray(props.data) &&
+          props.data.length === 0) ||
+        (typeof props.data === "object" &&
+          Object.keys(props.data).length === 0) ? (
         <NoData />
       ) : (
         props.children

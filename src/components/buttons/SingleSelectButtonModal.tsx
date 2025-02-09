@@ -80,7 +80,7 @@ const SingleSelectButtonModal = <D,>(
             iconName="close"
             style={{
               ...styles.deleteBtnStyle,
-              ...(i18n.language === "fa" ? { left: 5 } : { right: 5 }),
+              ...(i18n.language === "fa" ? { right: 5 } : { left: 5 }),
             }}
             onPress={props.onDeleteValue}
             iconColor={appColors.black}

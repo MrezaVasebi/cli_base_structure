@@ -56,7 +56,7 @@ const Content = (props: ContentProps) => {
 
   // const {title} = useRoute<TestingRouteProp>().params;
 
-  const { loading, onInvokeApi } = useApi();
+  const { loading, onInvokeApiAsync } = useApi();
   const { theme, setTheme } = useAppConfig();
 
   const { i18n } = useTranslation();
@@ -299,7 +299,7 @@ const Content = (props: ContentProps) => {
               showCloseBtnModal={true}
               modalTitle={"chooseAnItem"}
               modalAnimation={modalAnimation}
-              style={{ marginTop: 20, width:'100%' }}
+              style={{ marginTop: 20, width: "100%" }}
               onPressShowModal={() => {
                 openModal(() => setItemModal(true));
               }}

@@ -23,36 +23,18 @@ export function secondsToTime(secs: number): TimeType {
 }
 
 export const getDayName = (date: string) => {
-  var days = [
-    "Sunday",
-    "Monday",
-    "Tuesday",
-    "Wednesday",
-    "Thursday",
-    "Friday",
-    "Saturday",
+  const persianDays = [
+    "یکشنبه",
+    "دوشنبه",
+    "سه شنبه",
+    "چهارشنبه",
+    "پنج شنبه",
+    "جمعه",
+    "شنبه",
   ];
 
-  var myDate = new Date(date);
-  let dayName = days[myDate.getDay()];
-  switch (dayName) {
-    case "Saturday":
-      return "شنبه";
-    case "Sunday":
-      return "یکشنبه";
-    case "Monday":
-      return "دوشنبه";
-    case "Tuesday":
-      return "سه شنبه";
-    case "Wednesday":
-      return "چهارشنبه";
-    case "Thursday":
-      return "پنج شنبه";
-    case "Friday":
-      return "جمعه";
-    default:
-      return null;
-  }
+  const dayIndex = new Date(date).getDay();
+  return persianDays[dayIndex] || null;
 };
 
 export const getMonthName = (month: string) => {
@@ -86,9 +68,10 @@ export const getMonthName = (month: string) => {
   }
 };
 
-export const numberWithCommas = (v: string) => {
-  if (!v || v === "0") return "";
-  return v.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+export const numberWithCommas = (value: string) => {
+  return value && value !== "0"
+    ? value.replace(/\B(?=(\d{3})+(?!\d))/g, ",")
+    : "";
 };
 
 export const convertGeoDateTimeToShamsiWithMonth = (date: string) => {
@@ -97,21 +80,18 @@ export const convertGeoDateTimeToShamsiWithMonth = (date: string) => {
 
   if (!date) return null;
 
-  let dateTime = moment
+  const dateTime = moment
     .from(new Date(date).toISOString(), "en", "YYYY/MM/DD HH:mm")
     .locale("fa")
-    .format("YYYY/MM/DD HH:mm");
+    .format("YYYY/MM/DD HH:mm")
+    .split(" ");
 
-  // dateTime = dateTime.split(" ");
-  const splittedValue = dateTime.split(" ");
-  let splitDate = splittedValue[0].split("/");
+  const [year, month, day] = dateTime[0].split("/");
+  const time = dateTime[1];
+  const dayName = getDayName(date);
+  const monthName = getMonthName(month);
 
-  let time = splittedValue[1];
-  let dayNumber = splitDate[2];
-  let dayName = getDayName(date);
-  let monthName = getMonthName(splitDate[1]);
-
-  return `${dayName} ${dayNumber} ${monthName} - ${time}`;
+  return `${dayName} ${day} ${monthName} - ${time}`;
 };
 
 export const convertGeoDateTimeToShamsiDate = (date: string) => {
@@ -141,28 +121,19 @@ export const convertGeoDateToShamsiDate = (date: string) => {
 export const fromNow = (timestamp: Date) => {
   // input: new Date("2023-02-01")
 
-  const now = new Date();
-  const elapsed = now.getTime() - timestamp.getTime(); // Elapsed time in milliseconds
-
+  const elapsed = Date.now() - timestamp.getTime();
   const minutes = Math.floor(elapsed / (1000 * 60));
-  const hours = Math.floor(elapsed / (1000 * 60 * 60));
-  const days = Math.floor(elapsed / (1000 * 60 * 60 * 24));
-  const months = Math.floor(elapsed / (1000 * 60 * 60 * 24 * 30)); // Approximate months
-  const years = Math.floor(elapsed / (1000 * 60 * 60 * 24 * 365));
+  const hours = Math.floor(minutes / 60);
+  const days = Math.floor(hours / 24);
+  const months = Math.floor(days / 30);
+  const years = Math.floor(days / 365);
 
-  if (years >= 1) {
-    return "aFewYearsAgo";
-  } else if (months >= 1) {
-    return "aFewMonthAgo";
-  } else if (days >= 1) {
-    return "aFewDaysAgo";
-  } else if (hours >= 1) {
-    return "aFewHoursAgo";
-  } else if (minutes >= 1) {
-    return "aFewMinutesAgo";
-  } else {
-    return "justNow";
-  }
+  if (years >= 1) return "aFewYearsAgo";
+  if (months >= 1) return "aFewMonthAgo";
+  if (days >= 1) return "aFewDaysAgo";
+  if (hours >= 1) return "aFewHoursAgo";
+  if (minutes >= 1) return "aFewMinutesAgo";
+  return "justNow";
 };
 
 export const checkValidateEmail = (email: string) => {
