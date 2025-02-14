@@ -8,7 +8,7 @@ import {
   ViewStyle,
 } from "react-native";
 import { launchImageLibrary } from "react-native-image-picker";
-import { appImages, DEV_MODE } from "../../utils";
+import { appColors, appImages, DEV_MODE, shadowStyle } from "../../utils";
 import { ButtonWrapper } from "../buttons";
 import { AppText } from "../texts";
 import CachedImage from "./CachedImage";
@@ -82,6 +82,9 @@ const styles = StyleSheet.create({
     width: 80,
     height: 80,
     borderRadius: 40,
+    overflow: "hidden",
+    backgroundColor: appColors.white,
+    ...shadowStyle,
   },
   imgStyle: {
     width: "100%",
