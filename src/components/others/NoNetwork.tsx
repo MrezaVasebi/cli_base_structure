@@ -1,7 +1,7 @@
 import React from "react";
 import { StatusBar, StyleSheet, View } from "react-native";
-import { appColors } from "../../utils";
 import { AppText } from "../texts";
+import RootView from "./RootView";
 
 interface INoNetwork {
   status: boolean | null;
@@ -9,17 +9,19 @@ interface INoNetwork {
 
 const NoNetwork = (props: INoNetwork) => {
   return (
-    <View style={styles.rootStyle}>
+    <RootView bodyStyle={styles.rootStyle}>
       <StatusBar hidden />
 
-      {props.status === null ? (
-        <AppText lbl="Loading..." />
-      ) : !props.status ? (
-        <AppText lbl="No Internet Connection" />
-      ) : (
-        <AppText lbl="Welcome Back ..." />
-      )}
-    </View>
+      <View style={styles.container}>
+        {props.status === null ? (
+          <AppText style={styles.txtStyle} lbl="loading" />
+        ) : !props.status ? (
+          <AppText lbl="noInternet" style={styles.txtStyle} />
+        ) : (
+          <AppText lbl="welcomeBack" />
+        )}
+      </View>
+    </RootView>
   );
 };
 
@@ -30,6 +32,13 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: "center",
     justifyContent: "center",
-    backgroundColor: appColors.bg.light,
+  },
+  container: {
+    width: "100%",
+    paddingHorizontal: 20,
+  },
+  txtStyle: {
+    fontSize: 18,
+    textAlign: "center",
   },
 });

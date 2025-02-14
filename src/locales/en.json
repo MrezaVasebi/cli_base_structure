@@ -35,5 +35,8 @@
   "thisIsSuccessMessage": "This is success message",
   "searchItem": "Search item",
   "language": "Language",
-  "errorInServer": "Error in server"
+  "errorInServer": "Error in server",
+  "loading": "Loading ...",
+  "noInternet": "No internet, Please check your device internet connection...",
+  "welcomeBack": "Welcome Back"
 }

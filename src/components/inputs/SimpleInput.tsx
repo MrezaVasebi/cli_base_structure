@@ -11,6 +11,7 @@ const SimpleInput = (props: TextInputProps) => {
       value={props.value}
       editable={props.editable}
       maxLength={props.maxLength}
+      keyboardType={props.keyboardType}
       onChangeText={props.onChangeText}
       style={[
         styles.style,

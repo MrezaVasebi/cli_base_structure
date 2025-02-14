@@ -10,11 +10,11 @@ import {
   ViewProps,
 } from "react-native";
 import { useAppConfig } from "../../context";
+import { useFadeAnimation } from "../../hooks";
 import { appColors, iconsName } from "../../utils";
 import { IconButton } from "../buttons";
-import SimpleInput from "./SimpleInput";
 import { AppText } from "../texts";
-import { useFadeAnimation } from "../../hooks";
+import SimpleInput from "./SimpleInput";
 
 interface ISecureInput {
   lbl?: string;
@@ -30,7 +30,7 @@ const SecureInput = (props: ISecureInput & TextInputProps) => {
   const { fadeAnim } = useFadeAnimation(props.value);
 
   return (
-    <View style={[styles.rootStyle, props.rootStyle]}>
+    <View style={[props.rootStyle]}>
       {props.visible ? (
         <AppText lbl={props.lbl} style={[styles.lblStyle, props.lblStyle]} />
       ) : null}
@@ -42,6 +42,7 @@ const SecureInput = (props: ISecureInput & TextInputProps) => {
         maxLength={props.maxLength}
         placeholder={props.placeholder}
         onChangeText={props.onChangeText}
+        keyboardType={props.keyboardType}
         secureTextEntry={props.secureTextEntry}
       />
 
@@ -49,7 +50,7 @@ const SecureInput = (props: ISecureInput & TextInputProps) => {
         <Animated.View
           style={{
             ...styles.iconStyle,
-            ...(i18n.language === "fa" ? { left: 5 } : { right: 5 }),
+            ...(i18n.language === "fa" ? { right: 5 } : { left: 5 }),
             opacity: fadeAnim,
           }}
         >
@@ -71,10 +72,6 @@ const SecureInput = (props: ISecureInput & TextInputProps) => {
 export default SecureInput;
 
 const styles = StyleSheet.create({
-  rootStyle: {
-    height: 45,
-    borderRadius: 5,
-  },
   iconStyle: {
     top: 7,
     position: "absolute",

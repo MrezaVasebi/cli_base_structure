@@ -27,6 +27,7 @@ const InputWithLabel = (props: IInputWithLabel & TextInputProps) => {
         editable={props.editable}
         maxLength={props.maxLength}
         placeholder={props.placeholder}
+        keyboardType={props.keyboardType}
         onChangeText={props.onChangeText}
         secureTextEntry={props.secureTextEntry}
         placeholderTextColor={props.placeholderTextColor}

@@ -41,6 +41,7 @@ const InputWithClearButton = (
         editable={props.editable}
         maxLength={props.maxLength}
         placeholder={props.placeholder}
+        keyboardType={props.keyboardType}
         onChangeText={props.onChangeText}
         secureTextEntry={props.secureTextEntry}
         placeholderTextColor={props.placeholderTextColor}
@@ -50,7 +51,7 @@ const InputWithClearButton = (
         <Animated.View
           style={{
             ...styles.iconStyle,
-            ...(i18n.language === "fa" ? { left: 5 } : { right: 5 }),
+            ...(i18n.language === "fa" ? { right: 5 } : { left: 5 }),
             opacity: fadeAnim,
           }}
         >

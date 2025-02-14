@@ -35,5 +35,8 @@
   "thisIsSuccessMessage": "نوتیف موفقیت",
   "searchItem": "جستجوی ایتم",
   "language": "زبان",
-  "errorInServer": "خطایی در سرور رخ داده است"
+  "errorInServer": "خطایی در سرور رخ داده است",
+  "loading": "در حال بررسی اینترنت...",
+  "noInternet": "دستگاه شما به اینترنت دسترسی ندارد. لطفا دوباره چک کنید.",
+  "welcomeBack": "خوش آمدید"
 }

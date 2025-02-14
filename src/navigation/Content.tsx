@@ -375,7 +375,6 @@ const Content = (props: ContentProps) => {
               visible={true}
               value={enteredValue}
               lbl={"enterFirstName"}
-              rootStyle={{ marginTop: 20 }}
               onPressClear={() => setEnteredValue("")}
               onChangeText={(v: string) => setEnteredValue(v)}
             />

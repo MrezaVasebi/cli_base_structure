@@ -52,6 +52,7 @@ const SearchInput = (props: ISearchInput & TextInputProps) => {
         maxLength={props.maxLength}
         placeholder={props.placeholder}
         onChangeText={props.onChangeText}
+        keyboardType={props.keyboardType}
         secureTextEntry={props.secureTextEntry}
         style={[styles.inputStyle, props.style]}
         placeholderTextColor={props.placeholderTextColor}
@@ -61,7 +62,7 @@ const SearchInput = (props: ISearchInput & TextInputProps) => {
         <Animated.View
           style={{
             ...styles.iconStyle,
-            ...(i18n.language === "fa" ? { left: 5 } : { right: 5 }),
+            ...(i18n.language === "fa" ? { right: 5 } : { left: 5 }),
             opacity: fadeAnim,
           }}
         >

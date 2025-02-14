@@ -21,11 +21,7 @@ const Splash = (props: SplashProps) => {
   }, []);
 
   return (
-    <RootView
-      bodyStyle={{
-        ...styles.rootStyle,
-      }}
-    >
+    <RootView bodyStyle={{ ...styles.rootStyle }}>
       <AppText lbl={"appDescription"} style={styles.descStyle} />
     </RootView>
   );
@@ -39,7 +35,8 @@ const styles = StyleSheet.create({
     justifyContent: "center",
   },
   descStyle: {
-    fontSize: 14,
+    fontSize: 18,
     lineHeight: 30,
+    textAlign: "center",
   },
 });
