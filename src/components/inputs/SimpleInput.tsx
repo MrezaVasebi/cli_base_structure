@@ -37,7 +37,7 @@ export default SimpleInput;
 const styles = StyleSheet.create({
   style: {
     height: 45,
-    fontSize: 15,
+    fontSize: 13,
     borderRadius: 5,
     paddingHorizontal: 10,
     color: appColors.black,

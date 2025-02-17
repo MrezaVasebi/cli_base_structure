@@ -23,6 +23,7 @@ import {
   InputPhoneNumber,
   InputWithClearButton,
   InputWithLabel,
+  PinInput,
   PriceInput,
   SearchInput,
   SecureInput,
@@ -370,6 +371,15 @@ const Content = (props: ContentProps) => {
               onPressEye={() => setSecureText(!secureText)}
               onChangeText={(v: string) => setEnteredValue(v)}
             />
+
+            <View style={{ marginBottom: 20, paddingHorizontal: 50 }}>
+              <PinInput
+                length={4}
+                onComplete={(value: string) => {
+                  console.log({ value });
+                }}
+              />
+            </View>
 
             <InputWithClearButton
               visible={true}

@@ -20,6 +20,7 @@ interface IRootView {
 
 const RootView = (props: IRootView) => {
   const { theme } = useAppConfig();
+
   return (
     <Fragment>
       <StatusBar hidden />
