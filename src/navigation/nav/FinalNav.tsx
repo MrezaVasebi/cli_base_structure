@@ -21,7 +21,7 @@ function FinalNav() {
     requestMultiplePermissions();
   }, []);
 
-  if (!hasNetwork) return <NoNetwork status={hasNetwork} />;
+  if (!hasNetwork) return <NoNetwork />;
 
   return (
     <View

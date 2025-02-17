@@ -11,7 +11,7 @@ type AppConfigContextType = {
   isAndroid: boolean;
   hasNetwork: boolean | null;
 
-  theme: ThemeType;
+  theme: ThemeType | null;
   setTheme: (v: ThemeType) => void;
 };
 
@@ -33,9 +33,9 @@ interface IAppConfigProvider {
 }
 
 export const AppConfigProvider = (props: IAppConfigProvider) => {
+  const [theme, setTheme] = useState<ThemeType | null>(null);
   const [isAndroid, setIsAndroid] = useState<boolean>(false);
   const [hasNetwork, setHasNetwork] = useState<boolean | null>(null);
-  const [theme, setTheme] = useState<ThemeType>("light");
 
   useEffect(() => {
     // check platform

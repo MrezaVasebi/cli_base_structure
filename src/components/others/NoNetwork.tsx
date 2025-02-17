@@ -1,21 +1,20 @@
 import React from "react";
 import { StatusBar, StyleSheet, View } from "react-native";
+import { useAppConfig } from "../../context";
 import { AppText } from "../texts";
 import RootView from "./RootView";
 
-interface INoNetwork {
-  status: boolean | null;
-}
+const NoNetwork = () => {
+  const { hasNetwork } = useAppConfig();
 
-const NoNetwork = (props: INoNetwork) => {
   return (
-    <RootView bodyStyle={styles.rootStyle}>
+    <RootView bodyStyle={styles.container}>
       <StatusBar hidden />
 
       <View style={styles.container}>
-        {props.status === null ? (
+        {hasNetwork === null ? (
           <AppText style={styles.txtStyle} lbl="loading" />
-        ) : !props.status ? (
+        ) : !hasNetwork ? (
           <AppText lbl="noInternet" style={styles.txtStyle} />
         ) : (
           <AppText lbl="welcomeBack" />
