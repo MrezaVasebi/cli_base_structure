@@ -15,7 +15,7 @@ export const useFadeAnimation = (v: string | undefined) => {
     } else {
       // Fade in animation
       Animated.timing(fadeAnim, {
-        toValue: 1,
+        toValue: 0,
         duration: 300,
         useNativeDriver: true,
       }).start();

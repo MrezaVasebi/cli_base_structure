@@ -17,62 +17,65 @@ import { AppText } from "../texts";
 import SimpleInput from "./SimpleInput";
 
 interface ISearchInput {
-  lbl: string;
+  lbl?: string;
   visible?: boolean;
+  iconColor?: string;
   onPressClear: () => void;
   lblStyle?: StyleProp<TextStyle>;
   rootStyle?: StyleProp<ViewStyle>;
+  innerStyle?: StyleProp<ViewStyle>;
 }
 
 const SearchInput = (props: ISearchInput & TextInputProps) => {
   const { i18n } = useTranslation();
-  const language = i18n.language === "fa";
   const { fadeAnim } = useFadeAnimation(props.value);
 
   return (
-    <View style={props.rootStyle}>
+    <View style={[styles.rootStyle, props.rootStyle]}>
       {props.visible ? (
         <AppText lbl={props.lbl} style={[styles.lblStyle, props.lblStyle]} />
       ) : null}
 
       <View
-        style={{
-          position: "absolute",
-          bottom: 12,
-          ...(language ? { left: 5 } : { right: 5 }),
-          zIndex: 1,
-        }}
+        style={[
+          styles.inputView,
+          { flexDirection: i18n.language === "fa" ? "row" : "row-reverse" },
+          props.innerStyle,
+        ]}
       >
-        <AppIcon name={iconsName.search} color={appColors.darkGrey} />
-      </View>
+        <View style={{ ...styles.iconStyle }}>
+          <AppIcon
+            name={iconsName.search}
+            color={props.iconColor ?? appColors.darkGrey}
+          />
+        </View>
 
-      <SimpleInput
-        value={props.value}
-        editable={props.editable}
-        maxLength={props.maxLength}
-        placeholder={props.placeholder}
-        onChangeText={props.onChangeText}
-        keyboardType={props.keyboardType}
-        secureTextEntry={props.secureTextEntry}
-        style={[styles.inputStyle, props.style]}
-        placeholderTextColor={props.placeholderTextColor}
-      />
+        <SimpleInput
+          value={props.value}
+          editable={props.editable}
+          maxLength={props.maxLength}
+          placeholder={props.placeholder}
+          onChangeText={props.onChangeText}
+          secureTextEntry={props.secureTextEntry}
+          style={[styles.inputStyle, props.style]}
+          placeholderTextColor={props.placeholderTextColor}
+        />
 
-      {props.value && (
         <Animated.View
           style={{
             ...styles.iconStyle,
-            ...(i18n.language === "fa" ? { right: 5 } : { left: 5 }),
             opacity: fadeAnim,
+            ...(i18n.language === "fa" ? { right: 2 } : { left: 2 }),
+            position: "absolute",
           }}
         >
           <IconButton
             iconName={iconsName.close}
             onPress={props.onPressClear}
-            iconColor={appColors.black}
+            iconColor={props.iconColor ?? appColors.black}
           />
         </Animated.View>
-      )}
+      </View>
     </View>
   );
 };
@@ -80,14 +83,26 @@ const SearchInput = (props: ISearchInput & TextInputProps) => {
 export default SearchInput;
 
 const styles = StyleSheet.create({
+  rootStyle: {
+    height: 75,
+  },
   lblStyle: {
-    marginBottom: 5,
+    marginVertical: 5,
   },
   iconStyle: {
-    bottom: 7,
-    position: "absolute",
+    width: 30,
+    height: "100%",
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  inputView: {
+    flex: 1,
+    height: 55,
+    borderRadius: 5,
+    backgroundColor: appColors.white,
   },
   inputStyle: {
-    paddingHorizontal: 30,
+    flex: 1,
+    height: "100%",
   },
 });

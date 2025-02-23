@@ -83,9 +83,9 @@ const styles = StyleSheet.create({
     justifyContent: "space-evenly",
   },
   input: {
-    width: 40,
-    height: 40,
-    fontSize: 18,
+    width: 45,
+    height: 45,
+    fontSize: 15,
     borderWidth: 1,
     borderRadius: 5,
     textAlign: "center",

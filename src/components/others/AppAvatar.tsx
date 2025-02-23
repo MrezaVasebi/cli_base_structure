@@ -3,6 +3,7 @@ import {
   Image,
   StyleProp,
   StyleSheet,
+  TextStyle,
   TouchableOpacityProps,
   View,
   ViewStyle,
@@ -15,6 +16,7 @@ import CachedImage from "./CachedImage";
 
 interface IAppAvatar {
   name?: string;
+  lblStyle?: StyleProp<TextStyle>;
   rootStyle?: StyleProp<ViewStyle>;
   returnUriAndFileName: ({
     uri,
@@ -65,7 +67,10 @@ const AppAvatar = (props: IAppAvatar & TouchableOpacityProps) => {
         )}
       </ButtonWrapper>
 
-      <AppText lbl={props.name ?? ""} style={{ marginVertical: 10 }} />
+      <AppText
+        lbl={props.name ?? ""}
+        style={[{ marginVertical: 10 }, props.lblStyle]}
+      />
     </View>
   );
 };
