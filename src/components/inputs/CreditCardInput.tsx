@@ -22,8 +22,9 @@ interface ICreditCardInput {
 }
 
 const CreditCardInput = (props: TextInputMaskProps & ICreditCardInput) => {
-  const { i18n } = useTranslation();
   const { theme } = useAppConfig();
+  const { i18n } = useTranslation();
+
   return (
     <View style={[props.rootStyle]}>
       {props.visible ? (
@@ -35,11 +36,14 @@ const CreditCardInput = (props: TextInputMaskProps & ICreditCardInput) => {
 
       <TextInputMask
         maxLength={19}
+        type={"custom"}
+        options={{
+          mask: "9999-9999-9999-9999",
+        }}
         value={props.value}
-        type={"credit-card"}
         keyboardType="numeric"
         onChangeText={props.onChangeText}
-        placeholder="0000 0000 0000 0000"
+        placeholder="0000-0000-0000-0000"
         placeholderTextColor={
           props.placeholderTextColor
             ? props.placeholderTextColor

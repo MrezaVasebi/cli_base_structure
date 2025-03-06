@@ -51,7 +51,6 @@ const ButtonOfTab = (props: IButtonOfTab) => {
           : theme === "light"
           ? appColors.txtColor.dark
           : appColors.txtColor.dark,
-      borderRadius: 50,
     };
   };
 
@@ -60,12 +59,15 @@ const ButtonOfTab = (props: IButtonOfTab) => {
       lbl={t(props.mainLbl)}
       onPress={props.onPress}
       lblStyle={{ color: calcUI()?.txtColor }}
-      style={{
-        backgroundColor: calcUI()?.bgColor,
-        borderRadius: calcUI()?.borderRadius,
-        width: props.tabCounter === "Two" ? "49%" : "33%",
-      }}
-    ></SimpleButton>
+      style={[
+        {
+          backgroundColor: calcUI()?.bgColor,
+          borderRadius: calcUI()?.borderRadius,
+          width: props.tabCounter === "Two" ? "49%" : "33%",
+        },
+        props.style,
+      ]}
+    />
   );
 };
 

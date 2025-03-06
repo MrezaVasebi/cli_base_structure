@@ -40,7 +40,7 @@ const IbanInput = (props: TextInputMaskProps & IIbanInput) => {
         <TextInputMask
           type={"custom"}
           options={{
-            mask: "99 9999 9999 9999 9999 9999 99",
+            mask: "99-9999-9999-9999-9999-9999-99",
           }}
           maxLength={35}
           value={props.value}
@@ -52,7 +52,7 @@ const IbanInput = (props: TextInputMaskProps & IIbanInput) => {
             },
           }}
           onChangeText={props.onChangeText}
-          placeholder="00 0000 0000 0000 0000 0000 00"
+          placeholder="00-0000-0000-0000-0000-0000-00"
           placeholderTextColor={
             props.placeholderTextColor
               ? props.placeholderTextColor

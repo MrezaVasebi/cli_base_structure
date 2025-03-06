@@ -7,11 +7,13 @@ import {
   View,
   ViewStyle,
 } from "react-native";
+import { appColors } from "../../utils";
 import { AppText } from "../texts";
 import SimpleInput from "./SimpleInput";
 
 interface IInputWithLabel {
   lbl: string;
+  isRequired?: boolean;
   lblStyle?: StyleProp<TextStyle>;
   rootStyle?: StyleProp<ViewStyle>;
 }
@@ -19,7 +21,9 @@ interface IInputWithLabel {
 const InputWithLabel = (props: IInputWithLabel & TextInputProps) => {
   return (
     <View style={props.rootStyle}>
-      <AppText lbl={props.lbl} style={[styles.lblStyle, props.lblStyle]} />
+      <AppText lbl={props.lbl} style={[styles.lblStyle,{
+        color: props.isRequired? appColors.isRequired:appColors.black
+      }, props.lblStyle]} />
 
       <SimpleInput
         value={props.value}

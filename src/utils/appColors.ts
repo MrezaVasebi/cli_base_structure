@@ -20,6 +20,7 @@ export const appColors = {
   black: "#000",
   orange: "#FF5722",
   darkGrey: "#888888",
+  isRequired: "#ef233c",
   transparent: "transparent",
   modalLightBgColor: "rgba(0,0,0,.5)",
   modalDarkBgColor: "rgba(255,255,255,.3)",

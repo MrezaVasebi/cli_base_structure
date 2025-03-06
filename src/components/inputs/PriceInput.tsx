@@ -17,8 +17,10 @@ import { AppText } from "../texts";
 interface IPriceInput {
   lbl?: string;
   visible?: boolean;
+  isRequired?: boolean;
   lblStyle?: StyleProp<TextStyle>;
   rootStyle?: StyleProp<ViewStyle>;
+  inputContainer?: StyleProp<ViewStyle>;
 }
 
 const PriceInput = (props: TextInputMaskProps & IPriceInput) => {
@@ -29,20 +31,23 @@ const PriceInput = (props: TextInputMaskProps & IPriceInput) => {
     <View style={[props.rootStyle]}>
       {props.visible ? (
         <AppText
-          lbl={"enterDesiredMoney"}
-          style={[styles.lblStyle, props.lblStyle]}
+          lbl={props.lbl ?? "enterDesiredMoney"}
+          style={[
+            styles.lblStyle,
+            {
+              color: props.isRequired ? appColors.isRequired : appColors.black,
+            },
+            props.lblStyle,
+          ]}
         />
       ) : null}
 
       <View
-        style={{
-          borderRadius: 5,
-          flexDirection: "row",
-          alignItems: "center",
-          ...(language ? { paddingLeft: 5 } : { paddingRight: 5 }),
-          backgroundColor: appColors.white,
-          ...shadowStyle,
-        }}
+        style={[
+          styles.inputContainer,
+          { ...(language ? { paddingLeft: 5 } : { paddingRight: 5 }) },
+          props.inputContainer,
+        ]}
       >
         <AppText
           lbl={"irr"}
@@ -60,7 +65,9 @@ const PriceInput = (props: TextInputMaskProps & IPriceInput) => {
           editable={props.editable}
           maxLength={props.maxLength}
           onChangeText={props.onChangeText}
-          placeholder={props.placeholder ? props.placeholder : t("enterAmount")}
+          placeholder={
+            props.placeholder ? t(props.placeholder) : t("enterAmount")
+          }
           style={[
             styles.inputStyle,
             {
@@ -90,6 +97,13 @@ const PriceInput = (props: TextInputMaskProps & IPriceInput) => {
 export default PriceInput;
 
 const styles = StyleSheet.create({
+  inputContainer: {
+    borderRadius: 5,
+    flexDirection: "row",
+    alignItems: "center",
+    backgroundColor: appColors.white,
+    ...shadowStyle,
+  },
   inputStyle: {
     flex: 1,
     height: 45,

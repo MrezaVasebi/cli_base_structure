@@ -17,13 +17,14 @@ interface ITabButton {
 
 const ThreeTabButton = (props: ITabButton & ViewProps) => {
   const { i18n } = useTranslation();
+  const isPersian = i18n.language === "fa";
 
   return (
     <View style={[styles.rootStyle, props.style]}>
       <View
         style={[
           styles.innerStyle,
-          { flexDirection: i18n.language === "fa" ? "row-reverse" : "row" },
+          { flexDirection: isPersian ? "row-reverse" : "row" },
           props.innerStyle,
         ]}
       >
@@ -35,8 +36,13 @@ const ThreeTabButton = (props: ITabButton & ViewProps) => {
           rightLabel={props.lblRight}
           centerLabel={props.lblCenter}
           style={{
-            borderTopRightRadius: 5,
-            borderBottomRightRadius: 5,
+            ...(isPersian
+              ? { borderTopLeftRadius: 50 }
+              : { borderTopRightRadius: 50 }),
+            ...(isPersian
+              ? { borderBottomLeftRadius: 50 }
+              : { borderBottomRightRadius: 50 }),
+            ...styles.btnStyle,
           }}
         />
 
@@ -48,7 +54,7 @@ const ThreeTabButton = (props: ITabButton & ViewProps) => {
           rightLabel={props.lblRight}
           onPress={props.onPressCenter}
           style={{
-            borderRadius: 0,
+            ...styles.btnStyle,
           }}
         />
 
@@ -60,8 +66,13 @@ const ThreeTabButton = (props: ITabButton & ViewProps) => {
           rightLabel={props.lblLeft}
           centerLabel={props.lblCenter}
           style={{
-            borderTopLeftRadius: 5,
-            borderBottomLeftRadius: 5,
+            ...(isPersian
+              ? { borderTopRightRadius: 50 }
+              : { borderTopLeftRadius: 50 }),
+            ...(isPersian
+              ? { borderBottomRightRadius: 50 }
+              : { borderBottomLeftRadius: 50 }),
+            ...styles.btnStyle,
           }}
         />
       </View>
@@ -72,18 +83,16 @@ const ThreeTabButton = (props: ITabButton & ViewProps) => {
 export default ThreeTabButton;
 
 const styles = StyleSheet.create({
-  rootStyle: {
-    height: 45,
-    alignItems: "center",
-    justifyContent: "center",
-  },
+  rootStyle: {},
   innerStyle: {
-    padding: 1,
+    padding: 2,
+    width: "100%",
     borderRadius: 45,
     overflow: "hidden",
-    alignItems: "center",
-    justifyContent: "space-between",
     backgroundColor: appColors.white,
     ...shadowStyle,
+  },
+  btnStyle: {
+    flex: 1,
   },
 });
