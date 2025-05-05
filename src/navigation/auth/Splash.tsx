@@ -17,7 +17,7 @@ const Splash = (props: SplashProps) => {
       props.navigation.navigate(ROUTES.Content, {
         title: "content",
       });
-    }, 5000);
+    }, 6000);
   }, []);
 
   return (

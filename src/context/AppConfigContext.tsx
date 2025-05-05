@@ -61,8 +61,8 @@ export const AppConfigProvider = (props: IAppConfigProvider) => {
   }, []);
 
   const getThemeAsync = async () => {
-    await storage<ThemeType>()
-      .readData(STORAGE_KEY.theme_key)
+    await storage<ThemeType>(STORAGE_KEY.theme_key)
+      .readData()
       .then((res) => {
         if (res) {
           setTheme(res);

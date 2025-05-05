@@ -34,7 +34,7 @@ import { ToastType } from "../components/others/AnimatedAppToast";
 import TimerCountDown from "../components/others/TimerCountDown";
 import { AppText } from "../components/texts";
 import { useAppConfig } from "../context";
-import { useApi, useOpenCloseModal, useTimerCountDown } from "../hooks";
+import { useOpenCloseModal, useTimerCountDown } from "../hooks";
 import { exitApplication, storage } from "../modules";
 import { ContentProps } from "../routes";
 import { appColors, iconsName, STORAGE_KEY } from "../utils";
@@ -57,7 +57,6 @@ const Content = (props: ContentProps) => {
 
   // const {title} = useRoute<TestingRouteProp>().params;
 
-  const { loading, onInvokeApiAsync } = useApi();
   const { theme, setTheme } = useAppConfig();
 
   const { i18n } = useTranslation();
@@ -138,9 +137,8 @@ const Content = (props: ContentProps) => {
           ]}
           onPress={async () => {
             await i18n.changeLanguage(isFaLanguage ? "en" : "fa");
-            await storage().storeData(
-              isFaLanguage ? "en" : "fa",
-              STORAGE_KEY.lang_key
+            await storage(STORAGE_KEY.lang_key).storeData(
+              isFaLanguage ? "en" : "fa"
             );
           }}
           iconName={iconsName.language}
@@ -154,9 +152,8 @@ const Content = (props: ContentProps) => {
           }}
           onPress={async () => {
             setTheme(theme === "light" ? "dark" : "light");
-            await storage().storeData(
-              theme === "light" ? "dark" : "light",
-              STORAGE_KEY.theme_key
+            await storage(STORAGE_KEY.theme_key).storeData(
+              theme === "light" ? "dark" : "light"
             );
           }}
           iconName={iconsName["theme-light-dark"]}

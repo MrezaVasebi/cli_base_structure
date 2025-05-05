@@ -5,8 +5,6 @@ export const ROUTES = {
   Content: "Content",
 } as const;
 
-export type RouteName = keyof typeof ROUTES;
-
 export type RootStackParams = {
   [ROUTES.Splash]: undefined;
   [ROUTES.Content]: {

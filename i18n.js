@@ -15,7 +15,7 @@ const languageDetector = {
   //   callback(locales[0].languageCode);
   // },
   detect: async (callback) => {
-    const savedDataJSON = await storage().readData(STORAGE_KEY.lang_key);
+    const savedDataJSON = await storage(STORAGE_KEY.lang_key).readData();
     if (DEV_MODE) console.log({ savedDataJSON });
 
     const lang = savedDataJSON ? savedDataJSON : "en";
