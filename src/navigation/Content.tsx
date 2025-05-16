@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { ScrollView, StyleSheet, View } from "react-native";
 import {
   AnimatedCheckBox,
@@ -30,7 +30,6 @@ import {
   SimpleInput,
 } from "../components/inputs";
 import { AppAvatar, AppDivider, RootView } from "../components/others";
-import { ToastType } from "../components/others/AnimatedAppToast";
 import TimerCountDown from "../components/others/TimerCountDown";
 import { AppText } from "../components/texts";
 import { useAppConfig } from "../context";
@@ -57,7 +56,7 @@ const Content = (props: ContentProps) => {
 
   // const {title} = useRoute<TestingRouteProp>().params;
 
-  const { theme, setTheme } = useAppConfig();
+  const { theme, setTheme, showToast } = useAppConfig();
 
   const { i18n } = useTranslation();
   const isFaLanguage = i18n.language === "fa";
@@ -86,31 +85,14 @@ const Content = (props: ContentProps) => {
   const [enteredValue, setEnteredValue] = useState<string>("");
   const [secureText, setSecureText] = useState<boolean>(true);
 
-  const [msgToast, setMsgToast] = useState<string>("");
-  const [typeToast, setTypeToast] = useState<ToastType>("error");
-  const [visibleToast, setVisibleToast] = useState<boolean>(false);
-
   const timer = 60;
   const { onStartAgain, secondsLeft } = useTimerCountDown({
     timer,
     validationValue: true,
   });
 
-  useEffect(() => {
-    if (visibleToast) {
-      setTimeout(() => {
-        setVisibleToast(false);
-      }, 3000);
-    }
-  }, [visibleToast]);
-
   return (
-    <RootView
-      toastType={typeToast}
-      toastMessage={msgToast}
-      toastVisible={visibleToast}
-      bodyStyle={styles.rootStyle}
-    >
+    <RootView bodyStyle={styles.rootStyle}>
       <View
         style={{
           ...styles.titleContainer,
@@ -459,14 +441,14 @@ const Content = (props: ContentProps) => {
             <AppDivider style={{ marginTop: 20 }} />
 
             <SimpleButton
-              lbl="Show/Hide toast"
+              lbl="Show Toast"
               style={{ marginTop: 20 }}
               onPress={() => {
-                setVisibleToast(true);
-                setTypeToast("error");
-                // setMsgToast("thisIsInfoMessage");
-                setMsgToast("thisIsErrorMessage");
-                // setMsgToast("thisIsSuccessMessage");
+                showToast({
+                  type: "error",
+                  duration: 3000,
+                  msg: "Error toast",
+                });
               }}
             />
 

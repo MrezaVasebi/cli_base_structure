@@ -13,7 +13,7 @@ export const Urls = {
       getProfile: function () {
         return `${url}profile/userId=${userId}`;
       },
-      editInfo: function () {
+      editInfo: () => {
         return `${url}profile/edit/userId=${userId}`;
       },
     };

@@ -7,13 +7,28 @@ import { STORAGE_KEY } from "../utils";
 
 export type ThemeType = "light" | "dark";
 
+type TToastType = "success" | "error" | "info";
+
+interface IToast {
+  duration: number;
+  type: TToastType;
+  msg: string | null;
+}
+
 type AppConfigContextType = {
   isAndroid: boolean;
   hasNetwork: boolean | null;
 
   theme: ThemeType | null;
   setTheme: (v: ThemeType) => void;
+
+  toast: IToast | null;
+  showToast: (v: IToast) => void;
 };
+
+interface IAppConfigProviderProps {
+  children: React.ReactNode;
+}
 
 const AppConfigContext = createContext<AppConfigContextType | undefined>(
   undefined
@@ -28,14 +43,11 @@ export const useAppConfig = () => {
   return context;
 };
 
-interface IAppConfigProvider {
-  children: React.ReactNode;
-}
-
-export const AppConfigProvider = (props: IAppConfigProvider) => {
+export const AppConfigProvider = (props: IAppConfigProviderProps) => {
   const [theme, setTheme] = useState<ThemeType | null>(null);
   const [isAndroid, setIsAndroid] = useState<boolean>(false);
   const [hasNetwork, setHasNetwork] = useState<boolean | null>(null);
+  const [toast, setToast] = useState<IToast | null>(null);
 
   useEffect(() => {
     // check platform
@@ -60,6 +72,18 @@ export const AppConfigProvider = (props: IAppConfigProvider) => {
     };
   }, []);
 
+  // useEffect(() => {
+  //   if (toast?.msg) {
+  //     setTimeout(() => {
+  //       setToast({
+  //         msg: "",
+  //         type: "error",
+  //         duration: 3000,
+  //       });
+  //     }, toast.duration ?? 3000);
+  //   }
+  // }, [toast?.msg]);
+
   const getThemeAsync = async () => {
     await storage<ThemeType>(STORAGE_KEY.theme_key)
       .readData()
@@ -82,6 +106,11 @@ export const AppConfigProvider = (props: IAppConfigProvider) => {
         theme,
         setTheme(v: ThemeType) {
           setTheme(v);
+        },
+
+        toast: toast,
+        showToast: (v: IToast) => {
+          setToast(v);
         },
       }}
     >

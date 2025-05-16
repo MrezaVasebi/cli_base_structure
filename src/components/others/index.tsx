@@ -3,6 +3,7 @@ import ApiComponent from "./ApiComponent";
 import AppAvatar from "./AppAvatar";
 import AppDivider from "./AppDivider";
 import AppSpinner from "./AppSpinner";
+import AppToast from "./AppToast";
 import BodyView from "./BodyView";
 import CachedImage from "./CachedImage";
 import CustomSpinner from "./CustomSpinner";
@@ -16,6 +17,7 @@ export {
   AppAvatar,
   AppDivider,
   AppSpinner,
+  AppToast,
   BodyView,
   CachedImage,
   CustomSpinner,

@@ -29,7 +29,7 @@ export const storage = <T>(key: string) => {
     readObj: async () => {
       try {
         const jsonValue = await AsyncStorage.getItem(key);
-        return jsonValue != null ? JSON.parse(jsonValue) : null;
+        return jsonValue != null ? (JSON.parse(jsonValue) as T) : null;
       } catch (error) {
         return null;
       }

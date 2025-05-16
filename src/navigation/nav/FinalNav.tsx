@@ -34,9 +34,7 @@ function FinalNav() {
       <NavigationContainer>
         <Stack.Navigator
           initialRouteName={ROUTES.Splash}
-          screenOptions={{
-            headerShown: false,
-          }}
+          screenOptions={{ headerShown: false }}
         >
           <Stack.Screen name={ROUTES.Splash} component={Splash} />
           <Stack.Screen name={ROUTES.Content} component={Content} />

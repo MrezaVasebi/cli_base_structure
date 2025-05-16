@@ -36,7 +36,7 @@ export const handleApiAsync = async <T>(
       return {
         data: null,
         statusCode: null,
-        errMsg: "Token is null",
+        errMsg: "Token is not exited in storage",
       };
     }
 

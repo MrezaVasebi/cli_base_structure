@@ -4,7 +4,7 @@ import { StatusBar, StyleProp, ViewStyle } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { useAppConfig } from "../../context";
 import { appColors } from "../../utils";
-import AnimatedAppToast, { ToastType } from "./AnimatedAppToast";
+import AnimatedAppToast from "./AnimatedAppToast";
 import BodyView from "./BodyView";
 
 interface IRootView {
@@ -12,10 +12,6 @@ interface IRootView {
   bodyBgColor?: string;
   children: React.ReactNode;
   bodyStyle?: StyleProp<ViewStyle>;
-
-  toastType?: ToastType;
-  toastMessage?: string;
-  toastVisible?: boolean;
 }
 
 const RootView = (props: IRootView) => {
@@ -57,11 +53,8 @@ const RootView = (props: IRootView) => {
           {props.children}
         </BodyView>
 
-        <AnimatedAppToast
-          type={props.toastType ?? "error"}
-          message={props.toastMessage ?? ""}
-          visible={props.toastVisible ?? false}
-        />
+        {/* showing toast */}
+        <AnimatedAppToast />
       </SafeAreaView>
     </Fragment>
   );
