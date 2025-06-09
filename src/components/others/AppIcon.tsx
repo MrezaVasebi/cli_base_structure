@@ -4,7 +4,7 @@ import Entypo from "react-native-vector-icons/Entypo";
 import Ionicons from "react-native-vector-icons/Ionicons";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 import { useAppConfig } from "../../context";
-import { appColors, iconsName } from "../../utils";
+import { appColors, icons } from "../../utils";
 
 export interface IAppIcon {
   name?: string;
@@ -24,40 +24,40 @@ const AppIcon = ({ name, size, color }: IAppIcon) => {
 
   const handleIcons = () => {
     switch (name) {
-      case iconsName.exit: {
+      case icons.exit: {
         return <Ionicons name={name} color={defaultColor} size={defaultSize} />;
       }
-      case iconsName.search: {
+      case icons.search: {
         return <Ionicons name={name} color={defaultColor} size={defaultSize} />;
       }
-      case iconsName.heart: {
+      case icons.heart: {
         return (
           <AntDesign name={name} color={defaultColor} size={defaultSize} />
         );
       }
-      case iconsName["eye-with-line"]: {
+      case icons["eye-with-line"]: {
         return <Entypo name={name} color={defaultColor} size={defaultSize} />;
       }
-      case iconsName.eye: {
+      case icons.eye: {
         return <Entypo name={name} color={defaultColor} size={defaultSize} />;
       }
-      case iconsName.language: {
+      case icons.language: {
         return <Entypo name={name} color={defaultColor} size={defaultSize} />;
       }
-      case iconsName.close: {
+      case icons.close: {
         return <Ionicons name={name} color={defaultColor} size={defaultSize} />;
       }
-      case iconsName.arrowleft: {
+      case icons.arrowleft: {
         return (
           <AntDesign name={name} color={defaultColor} size={defaultSize} />
         );
       }
-      case iconsName.arrowright: {
+      case icons.arrowright: {
         return (
           <AntDesign name={name} color={defaultColor} size={defaultSize} />
         );
       }
-      case iconsName["theme-light-dark"]: {
+      case icons["theme-light-dark"]: {
         return (
           <MaterialCommunityIcons
             name={name}

@@ -37,7 +37,7 @@ import { useAppConfig } from "../context";
 import { useOpenCloseModal, useTimerCountDown } from "../hooks";
 import { exitApplication, storage } from "../modules";
 import { ContentProps } from "../routes";
-import { appColors, iconsName, STORAGE_KEY } from "../utils";
+import { appColors, icons, STORAGE_KEY } from "../utils";
 
 // import {RouteProp} from '@react-navigation/native';
 // import {StackNavigationProp} from '@react-navigation/stack';
@@ -110,7 +110,7 @@ const Content = (props: ContentProps) => {
           }}
           iconSize={28}
           onPress={exitApplication}
-          iconName={iconsName["exit"]}
+          iconName={icons["exit"]}
         />
 
         <IconButton
@@ -124,7 +124,7 @@ const Content = (props: ContentProps) => {
               isFaLanguage ? "en" : "fa"
             );
           }}
-          iconName={iconsName.language}
+          iconName={icons.language}
           iconSize={25}
         />
 
@@ -139,7 +139,7 @@ const Content = (props: ContentProps) => {
               theme === "light" ? "dark" : "light"
             );
           }}
-          iconName={iconsName["theme-light-dark"]}
+          iconName={icons["theme-light-dark"]}
           iconSize={25}
         />
 
@@ -203,12 +203,12 @@ const Content = (props: ContentProps) => {
             />
 
             <View style={{ marginTop: 20, flexDirection: "row" }}>
-              <IconButton iconSize={30} iconName={iconsName.language} />
+              <IconButton iconSize={30} iconName={icons.language} />
 
               <IconButton
                 iconSize={30}
                 style={{ marginLeft: 20 }}
-                iconName={iconsName.heart}
+                iconName={icons.heart}
               />
             </View>
 
@@ -218,7 +218,7 @@ const Content = (props: ContentProps) => {
               label="language"
               style={{ marginTop: 20 }}
               lblStyle={{ fontSize: 15 }}
-              iconName={iconsName.language}
+              iconName={icons.language}
             />
 
             <LineTabButton

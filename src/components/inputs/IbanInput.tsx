@@ -9,7 +9,7 @@ import {
 } from "react-native";
 import { TextInputMask, TextInputMaskProps } from "react-native-masked-text";
 import { useAppConfig } from "../../context";
-import { appColors, appFonts, shadowStyle } from "../../utils";
+import { appColors, appFonts, globalUi } from "../../utils";
 import { AppText } from "../texts";
 
 interface IIbanInput {
@@ -77,7 +77,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     backgroundColor: appColors.white,
-    ...shadowStyle,
+    ...globalUi.shadowStyle,
   },
   lblStyle: {
     marginBottom: 5,

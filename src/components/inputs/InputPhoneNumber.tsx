@@ -11,7 +11,7 @@ import {
   TextInputMask,
   type TextInputMaskProps,
 } from "react-native-masked-text";
-import { appColors, appFonts, shadowStyle } from "../../utils";
+import { appColors, appFonts, globalUi } from "../../utils";
 import { AppText } from "../texts";
 
 interface IInputPhoneNumber {
@@ -70,7 +70,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 10,
     color: appColors.black,
     backgroundColor: appColors.white,
-    ...shadowStyle,
+    ...globalUi.shadowStyle,
   },
   lblStyle: {
     marginBottom: 5,

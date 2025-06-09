@@ -11,7 +11,7 @@ import {
   TextInputMask,
   type TextInputMaskProps,
 } from "react-native-masked-text";
-import { appColors, appFonts, shadowStyle } from "../../utils";
+import { appColors, appFonts, globalUi } from "../../utils";
 import { AppText } from "../texts";
 
 interface IPriceInput {
@@ -102,7 +102,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     backgroundColor: appColors.white,
-    ...shadowStyle,
+    ...globalUi.shadowStyle,
   },
   inputStyle: {
     flex: 1,

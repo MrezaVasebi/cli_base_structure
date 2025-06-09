@@ -1,7 +1,7 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
 import { StyleProp, StyleSheet, View, type ViewProps } from "react-native";
-import { appColors, shadowStyle } from "../../utils";
+import { appColors, globalUi } from "../../utils";
 import ButtonOfTab from "./ButtonOfTab";
 
 interface ITabButton {
@@ -90,7 +90,7 @@ const styles = StyleSheet.create({
     borderRadius: 45,
     overflow: "hidden",
     backgroundColor: appColors.white,
-    ...shadowStyle,
+    ...globalUi.shadowStyle,
   },
   btnStyle: {
     flex: 1,

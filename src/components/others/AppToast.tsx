@@ -2,7 +2,7 @@ import React from "react";
 import { useTranslation } from "react-i18next";
 import { StyleSheet, View, ViewProps } from "react-native";
 import { useAppConfig } from "../../context";
-import { appColors, shadowStyle } from "../../utils";
+import { appColors, globalUi } from "../../utils";
 import { AppText } from "../texts";
 
 const AppToast = (props: ViewProps) => {
@@ -56,7 +56,7 @@ const styles = StyleSheet.create({
     position: "absolute",
     justifyContent: "center",
     backgroundColor: appColors.white,
-    ...shadowStyle,
+    ...globalUi.shadowStyle,
   },
   sideStyle: {
     width: 10,

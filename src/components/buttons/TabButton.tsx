@@ -1,6 +1,6 @@
 import React from "react";
 import { StyleSheet, View, ViewProps } from "react-native";
-import { appColors, shadowStyle } from "../../utils";
+import { appColors, globalUi } from "../../utils";
 import { ButtonOfTab } from "./index";
 
 interface ITabButton {
@@ -55,6 +55,6 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "space-between",
     backgroundColor: appColors.white,
-    ...shadowStyle,
+    ...globalUi.shadowStyle,
   },
 });

@@ -10,7 +10,7 @@ import {
   ViewStyle,
 } from "react-native";
 import { useFadeAnimation } from "../../hooks";
-import { appColors, iconsName } from "../../utils";
+import { appColors, icons } from "../../utils";
 import { IconButton } from "../buttons";
 import AppIcon from "../others/AppIcon";
 import { AppText } from "../texts";
@@ -45,7 +45,7 @@ const SearchInput = (props: ISearchInput & TextInputProps) => {
       >
         <View style={{ ...styles.iconStyle }}>
           <AppIcon
-            name={iconsName.search}
+            name={icons.search}
             color={props.iconColor ?? appColors.darkGrey}
           />
         </View>
@@ -70,7 +70,7 @@ const SearchInput = (props: ISearchInput & TextInputProps) => {
           }}
         >
           <IconButton
-            iconName={iconsName.close}
+            iconName={icons.close}
             onPress={props.onPressClear}
             iconColor={props.iconColor ?? appColors.black}
           />

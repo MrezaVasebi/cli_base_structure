@@ -2,8 +2,7 @@ import React, { useEffect, useRef } from "react";
 import { useTranslation } from "react-i18next";
 import { Animated, Easing, StyleSheet, View } from "react-native";
 import { useAppConfig } from "../../context";
-import { appColors } from "../../utils";
-import { shadowStyle } from "../../utils/constants";
+import { appColors, globalUi } from "../../utils";
 import { AppText } from "../texts";
 
 const AnimatedAppToast = () => {
@@ -108,7 +107,7 @@ const styles = StyleSheet.create({
     overflow: "hidden",
     position: "absolute",
     justifyContent: "center",
-    ...shadowStyle,
+    ...globalUi.shadowStyle,
   },
   sideStyle: {
     width: 10,

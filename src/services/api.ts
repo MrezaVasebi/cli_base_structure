@@ -1,6 +1,6 @@
 import axios, { AxiosRequestConfig } from "axios";
 import { storage } from "../modules";
-import { DEV_MODE, STORAGE_KEY } from "../utils";
+import { STORAGE_KEY } from "../utils";
 
 interface IApiParams {
   token?: string;
@@ -63,9 +63,7 @@ export const handleApiAsync = async <T>(
     };
   } catch (error: any) {
     const errData = error?.response?.data;
-    if (DEV_MODE) {
-      console.log(errData);
-    }
+    console.log(JSON.stringify(errData, null, 2));
 
     const errStatus: number = errData?.status;
     return {

@@ -10,7 +10,7 @@ import {
   ViewStyle,
 } from "react-native";
 import { useFadeAnimation } from "../../hooks";
-import { appColors, iconsName } from "../../utils";
+import { appColors, icons } from "../../utils";
 import { IconButton } from "../buttons";
 import { AppText } from "../texts";
 import SimpleInput from "./SimpleInput";
@@ -56,7 +56,7 @@ const InputWithClearButton = (
           }}
         >
           <IconButton
-            iconName={iconsName.close}
+            iconName={icons.close}
             onPress={props.onPressClear}
             iconColor={appColors.black}
           />

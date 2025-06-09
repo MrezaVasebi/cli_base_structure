@@ -9,7 +9,7 @@ import {
   View,
   ViewStyle,
 } from "react-native";
-import { appColors, iconsName } from "../../utils";
+import { appColors, icons } from "../../utils";
 import { IconButton } from "../buttons";
 import { RequiredText } from "../texts";
 import SimpleInput from "./SimpleInput";
@@ -58,9 +58,7 @@ const SecureInput = (props: ISecureInput & TextInputProps) => {
             onPress={props.onPressEye}
             iconColor={appColors.black}
             iconName={
-              !props.secureTextEntry
-                ? iconsName.eye
-                : iconsName["eye-with-line"]
+              !props.secureTextEntry ? icons.eye : icons["eye-with-line"]
             }
           />
         </Animated.View>

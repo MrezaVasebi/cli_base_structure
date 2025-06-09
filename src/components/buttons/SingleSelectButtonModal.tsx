@@ -11,7 +11,7 @@ import {
   ViewStyle,
 } from "react-native";
 import { useAppConfig } from "../../context/AppConfigContext.tsx";
-import { appColors, shadowStyle } from "../../utils";
+import { appColors, globalUi } from "../../utils";
 import AnimatedRootModal from "../modals/AnimatedRootModal.tsx";
 import AppText from "../texts/AppText";
 import ButtonWrapper from "./ButtonWrapper";
@@ -52,7 +52,7 @@ const SingleSelectButtonModal = <D,>(
           {
             backgroundColor:
               theme === "light" ? appColors.white : appColors.white,
-            ...shadowStyle,
+            ...globalUi.shadowStyle,
           },
           props.innerStyle,
         ]}
@@ -113,8 +113,6 @@ const styles = StyleSheet.create({
     overflow: "hidden",
     paddingHorizontal: 7,
     flexDirection: "row",
-    // backgroundColor: appColors.white,
-    // ...shadowStyle,
   },
   showModalStyle: {
     flex: 1,

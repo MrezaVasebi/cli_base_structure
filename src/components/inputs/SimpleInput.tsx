@@ -1,7 +1,7 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
 import { StyleSheet, TextInput, TextInputProps } from "react-native";
-import { appColors, appFonts, shadowStyle } from "../../utils";
+import { appColors, appFonts, globalUi } from "../../utils";
 
 const SimpleInput = (props: TextInputProps) => {
   const { t, i18n } = useTranslation();
@@ -42,6 +42,6 @@ const styles = StyleSheet.create({
     paddingHorizontal: 10,
     color: appColors.black,
     backgroundColor: appColors.white,
-    ...shadowStyle,
+    ...globalUi.shadowStyle,
   },
 });

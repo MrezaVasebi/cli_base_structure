@@ -12,7 +12,7 @@ import {
   type TextInputMaskProps,
 } from "react-native-masked-text";
 import { useAppConfig } from "../../context";
-import { appColors, appFonts, shadowStyle } from "../../utils";
+import { appColors, appFonts, globalUi } from "../../utils";
 import { AppText } from "../texts";
 
 interface ICreditCardInput {
@@ -69,7 +69,7 @@ const styles = StyleSheet.create({
     textAlign: "center",
     color: appColors.black,
     backgroundColor: appColors.white,
-    ...shadowStyle,
+    ...globalUi.shadowStyle,
   },
   lblStyle: {
     marginBottom: 5,
