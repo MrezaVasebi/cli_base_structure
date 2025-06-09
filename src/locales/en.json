@@ -38,5 +38,6 @@
   "errorInServer": "Error in server",
   "loading": "Loading ...",
   "noInternet": "No internet, Please check your device internet connection...",
-  "welcomeBack": "Welcome Back"
+  "welcomeBack": "Welcome Back",
+  "pass": "Password"
 }

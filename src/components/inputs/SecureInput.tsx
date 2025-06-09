@@ -7,53 +7,53 @@ import {
   TextInputProps,
   TextStyle,
   View,
-  ViewProps,
+  ViewStyle,
 } from "react-native";
-import { useAppConfig } from "../../context";
-import { useFadeAnimation } from "../../hooks";
 import { appColors, iconsName } from "../../utils";
 import { IconButton } from "../buttons";
-import { AppText } from "../texts";
+import { RequiredText } from "../texts";
 import SimpleInput from "./SimpleInput";
 
 interface ISecureInput {
   lbl?: string;
   visible?: boolean;
+  isRequired?: boolean;
   onPressEye: () => void;
   lblStyle?: StyleProp<TextStyle>;
-  rootStyle?: StyleProp<ViewProps>;
+  rootStyle?: StyleProp<ViewStyle>;
 }
 
 const SecureInput = (props: ISecureInput & TextInputProps) => {
-  const { theme } = useAppConfig();
   const { i18n } = useTranslation();
-  const { fadeAnim } = useFadeAnimation(props.value);
 
   return (
     <View style={[props.rootStyle]}>
       {props.visible ? (
-        <AppText lbl={props.lbl} style={[styles.lblStyle, props.lblStyle]} />
+        <RequiredText
+          lbl={props.lbl}
+          lblStyle={props.lblStyle}
+          isRequired={props.isRequired}
+        />
       ) : null}
 
-      <SimpleInput
-        value={props.value}
-        style={props.style}
-        editable={props.editable}
-        maxLength={props.maxLength}
-        placeholder={props.placeholder}
-        onChangeText={props.onChangeText}
-        keyboardType={props.keyboardType}
-        secureTextEntry={props.secureTextEntry}
-      />
+      <View
+        style={{
+          ...styles.inputContainer,
+          flexDirection: i18n.language === "fa" ? "row" : "row-reverse",
+        }}
+      >
+        <SimpleInput
+          value={props.value}
+          editable={props.editable}
+          maxLength={props.maxLength}
+          placeholder={props.placeholder}
+          onChangeText={props.onChangeText}
+          keyboardType={props.keyboardType}
+          style={[styles.inputStyle, props.style]}
+          secureTextEntry={props.secureTextEntry}
+        />
 
-      {props.value && (
-        <Animated.View
-          style={{
-            ...styles.iconStyle,
-            ...(i18n.language === "fa" ? { right: 5 } : { left: 5 }),
-            opacity: fadeAnim,
-          }}
-        >
+        <Animated.View style={{ marginHorizontal: 5 }}>
           <IconButton
             onPress={props.onPressEye}
             iconColor={appColors.black}
@@ -64,7 +64,7 @@ const SecureInput = (props: ISecureInput & TextInputProps) => {
             }
           />
         </Animated.View>
-      )}
+      </View>
     </View>
   );
 };
@@ -72,11 +72,14 @@ const SecureInput = (props: ISecureInput & TextInputProps) => {
 export default SecureInput;
 
 const styles = StyleSheet.create({
-  iconStyle: {
-    top: 7,
-    position: "absolute",
+  inputContainer: {
+    borderRadius: 5,
+    overflow: "hidden",
+    alignItems: "center",
+    backgroundColor: appColors.white,
   },
-  lblStyle: {
-    marginBottom: 5,
+  inputStyle: {
+    flex: 1,
+    borderRadius: 0,
   },
 });

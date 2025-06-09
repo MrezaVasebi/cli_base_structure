@@ -17,6 +17,7 @@ import {
 } from "../components/buttons";
 
 import { useTranslation } from "react-i18next";
+import { Platform } from "react-native";
 import {
   CreditCardInput,
   IbanInput,
@@ -344,9 +345,12 @@ const Content = (props: ContentProps) => {
             />
 
             <SecureInput
+              visible
+              lbl="pass"
+              isRequired={true}
               value={enteredValue}
               secureTextEntry={secureText}
-              style={{ marginBottom: 20 }}
+              rootStyle={{ marginBottom: 20 }}
               onPressEye={() => setSecureText(!secureText)}
               onChangeText={(v: string) => setEnteredValue(v)}
             />
@@ -492,5 +496,11 @@ const styles = StyleSheet.create({
     marginTop: 20,
     alignItems: "center",
     justifyContent: "center",
+  },
+  test: {
+    ...Platform.select({
+      ios: {},
+      android: {},
+    }),
   },
 });

@@ -1,3 +1,4 @@
-import AppText from './AppText';
+import AppText from "./AppText";
+import RequiredText from "./RequiredText";
 
-export {AppText};
+export { AppText, RequiredText };
