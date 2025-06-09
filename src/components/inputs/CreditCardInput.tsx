@@ -11,26 +11,26 @@ import {
   TextInputMask,
   type TextInputMaskProps,
 } from "react-native-masked-text";
-import { useAppConfig } from "../../context";
 import { appColors, appFonts, globalUi } from "../../utils";
-import { AppText } from "../texts";
+import { RequiredText } from "../texts";
 
 interface ICreditCardInput {
   visible?: boolean;
+  isRequired?: boolean;
   lblStyle?: StyleProp<TextStyle>;
   rootStyle?: StyleProp<ViewStyle>;
 }
 
 const CreditCardInput = (props: TextInputMaskProps & ICreditCardInput) => {
-  const { theme } = useAppConfig();
   const { i18n } = useTranslation();
 
   return (
     <View style={[props.rootStyle]}>
       {props.visible ? (
-        <AppText
+        <RequiredText
+          lblStyle={[props.lblStyle]}
+          isRequired={props.isRequired}
           lbl={"enterCreditCardNumber"}
-          style={[styles.lblStyle, props.lblStyle]}
         />
       ) : null}
 
@@ -70,8 +70,5 @@ const styles = StyleSheet.create({
     color: appColors.black,
     backgroundColor: appColors.white,
     ...globalUi.shadowStyle,
-  },
-  lblStyle: {
-    marginBottom: 5,
   },
 });

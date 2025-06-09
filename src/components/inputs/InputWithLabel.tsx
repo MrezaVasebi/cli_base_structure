@@ -1,18 +1,17 @@
 import React from "react";
 import {
   StyleProp,
-  StyleSheet,
   TextInputProps,
   TextStyle,
   View,
   ViewStyle,
 } from "react-native";
-import { appColors } from "../../utils";
-import { AppText } from "../texts";
+import { RequiredText } from "../texts";
 import SimpleInput from "./SimpleInput";
 
 interface IInputWithLabel {
   lbl: string;
+  visible?: boolean;
   isRequired?: boolean;
   lblStyle?: StyleProp<TextStyle>;
   rootStyle?: StyleProp<ViewStyle>;
@@ -21,9 +20,13 @@ interface IInputWithLabel {
 const InputWithLabel = (props: IInputWithLabel & TextInputProps) => {
   return (
     <View style={props.rootStyle}>
-      <AppText lbl={props.lbl} style={[styles.lblStyle,{
-        color: props.isRequired? appColors.isRequired:appColors.black
-      }, props.lblStyle]} />
+      {props.visible && (
+        <RequiredText
+          lbl={props.lbl}
+          lblStyle={props.lblStyle}
+          isRequired={props.isRequired}
+        />
+      )}
 
       <SimpleInput
         value={props.value}
@@ -41,9 +44,3 @@ const InputWithLabel = (props: IInputWithLabel & TextInputProps) => {
 };
 
 export default InputWithLabel;
-
-const styles = StyleSheet.create({
-  lblStyle: {
-    marginBottom: 5,
-  },
-});

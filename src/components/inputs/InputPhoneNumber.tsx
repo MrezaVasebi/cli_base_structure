@@ -12,10 +12,11 @@ import {
   type TextInputMaskProps,
 } from "react-native-masked-text";
 import { appColors, appFonts, globalUi } from "../../utils";
-import { AppText } from "../texts";
+import { RequiredText } from "../texts";
 
 interface IInputPhoneNumber {
   visible?: boolean;
+  isRequired?: boolean;
   lblStyle?: StyleProp<TextStyle>;
   rootStyle?: StyleProp<ViewStyle>;
 }
@@ -26,9 +27,10 @@ const InputPhoneNumber = (props: TextInputMaskProps & IInputPhoneNumber) => {
   return (
     <View style={[props.rootStyle]}>
       {props.visible ? (
-        <AppText
+        <RequiredText
           lbl={"enterPhoneNumber"}
-          style={[styles.lblStyle, props.lblStyle]}
+          isRequired={props.isRequired}
+          lblStyle={[props.lblStyle]}
         />
       ) : null}
 
@@ -71,8 +73,5 @@ const styles = StyleSheet.create({
     color: appColors.black,
     backgroundColor: appColors.white,
     ...globalUi.shadowStyle,
-  },
-  lblStyle: {
-    marginBottom: 5,
   },
 });

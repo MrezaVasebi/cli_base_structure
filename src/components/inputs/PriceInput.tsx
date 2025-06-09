@@ -12,7 +12,7 @@ import {
   type TextInputMaskProps,
 } from "react-native-masked-text";
 import { appColors, appFonts, globalUi } from "../../utils";
-import { AppText } from "../texts";
+import { AppText, RequiredText } from "../texts";
 
 interface IPriceInput {
   lbl?: string;
@@ -30,15 +30,10 @@ const PriceInput = (props: TextInputMaskProps & IPriceInput) => {
   return (
     <View style={[props.rootStyle]}>
       {props.visible ? (
-        <AppText
+        <RequiredText
+          lblStyle={props.lblStyle}
+          isRequired={props.isRequired}
           lbl={props.lbl ?? "enterDesiredMoney"}
-          style={[
-            styles.lblStyle,
-            {
-              color: props.isRequired ? appColors.isRequired : appColors.black,
-            },
-            props.lblStyle,
-          ]}
         />
       ) : null}
 
@@ -109,8 +104,5 @@ const styles = StyleSheet.create({
     height: 45,
     fontSize: 13,
     color: appColors.black,
-  },
-  lblStyle: {
-    marginBottom: 5,
   },
 });

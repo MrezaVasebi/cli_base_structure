@@ -10,10 +10,11 @@ import {
 import { TextInputMask, TextInputMaskProps } from "react-native-masked-text";
 import { useAppConfig } from "../../context";
 import { appColors, appFonts, globalUi } from "../../utils";
-import { AppText } from "../texts";
+import { AppText, RequiredText } from "../texts";
 
 interface IIbanInput {
   visible?: boolean;
+  isRequired?: boolean;
   lblStyle?: StyleProp<TextStyle>;
   rootStyle?: StyleProp<ViewStyle>;
 }
@@ -25,9 +26,10 @@ const IbanInput = (props: TextInputMaskProps & IIbanInput) => {
   return (
     <View style={[styles.rootStyle, props.rootStyle]}>
       {props.visible ? (
-        <AppText
+        <RequiredText
           lbl={"enterIbanNumber"}
-          style={[styles.lblStyle, props.lblStyle]}
+          lblStyle={[props.lblStyle]}
+          isRequired={props.isRequired}
         />
       ) : null}
 
@@ -78,9 +80,6 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     backgroundColor: appColors.white,
     ...globalUi.shadowStyle,
-  },
-  lblStyle: {
-    marginBottom: 5,
   },
   unitStyle: {
     fontSize: 15,

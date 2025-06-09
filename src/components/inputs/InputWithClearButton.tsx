@@ -12,12 +12,13 @@ import {
 import { useFadeAnimation } from "../../hooks";
 import { appColors, icons } from "../../utils";
 import { IconButton } from "../buttons";
-import { AppText } from "../texts";
+import { RequiredText } from "../texts";
 import SimpleInput from "./SimpleInput";
 
 interface IInputWithClearButton {
   lbl: string;
   visible?: boolean;
+  isRequired?: boolean;
   onPressClear: () => void;
   lblStyle?: StyleProp<TextStyle>;
   rootStyle?: StyleProp<ViewStyle>;
@@ -32,36 +33,46 @@ const InputWithClearButton = (
   return (
     <View style={props.rootStyle}>
       {props.visible ? (
-        <AppText lbl={props.lbl} style={[styles.lblStyle, props.lblStyle]} />
+        <RequiredText
+          lbl={props.lbl}
+          lblStyle={[props.lblStyle]}
+          isRequired={props.isRequired}
+        />
       ) : null}
 
-      <SimpleInput
-        value={props.value}
-        style={props.style}
-        editable={props.editable}
-        maxLength={props.maxLength}
-        placeholder={props.placeholder}
-        keyboardType={props.keyboardType}
-        onChangeText={props.onChangeText}
-        secureTextEntry={props.secureTextEntry}
-        placeholderTextColor={props.placeholderTextColor}
-      />
+      <View
+        style={{
+          ...styles.inputContainer,
+          flexDirection: i18n.language === "fa" ? "row" : "row-reverse",
+        }}
+      >
+        <SimpleInput
+          value={props.value}
+          editable={props.editable}
+          maxLength={props.maxLength}
+          placeholder={props.placeholder}
+          keyboardType={props.keyboardType}
+          onChangeText={props.onChangeText}
+          secureTextEntry={props.secureTextEntry}
+          style={[styles.inputStyle, props.style]}
+          placeholderTextColor={props.placeholderTextColor}
+        />
 
-      {props.value && (
-        <Animated.View
-          style={{
-            ...styles.iconStyle,
-            ...(i18n.language === "fa" ? { right: 5 } : { left: 5 }),
-            opacity: fadeAnim,
-          }}
-        >
-          <IconButton
-            iconName={icons.close}
-            onPress={props.onPressClear}
-            iconColor={appColors.black}
-          />
-        </Animated.View>
-      )}
+        {props.value && (
+          <Animated.View
+            style={{
+              opacity: fadeAnim,
+              marginHorizontal: 5,
+            }}
+          >
+            <IconButton
+              iconName={icons.close}
+              onPress={props.onPressClear}
+              iconColor={appColors.black}
+            />
+          </Animated.View>
+        )}
+      </View>
     </View>
   );
 };
@@ -69,11 +80,14 @@ const InputWithClearButton = (
 export default InputWithClearButton;
 
 const styles = StyleSheet.create({
-  lblStyle: {
-    marginBottom: 5,
+  inputContainer: {
+    borderRadius: 5,
+    overflow: "hidden",
+    alignItems: "center",
+    backgroundColor: appColors.white,
   },
-  iconStyle: {
-    bottom: 7,
-    position: "absolute",
+  inputStyle: {
+    flex: 1,
+    borderRadius: 0,
   },
 });
