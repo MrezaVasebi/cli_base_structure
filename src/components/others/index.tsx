@@ -1,4 +1,5 @@
 import AnimatedAppToast from "./AnimatedAppToast";
+import AnimatedListContainer from "./AnimatedListContainer";
 import ApiComponent from "./ApiComponent";
 import AppAvatar from "./AppAvatar";
 import AppDivider from "./AppDivider";
@@ -13,6 +14,7 @@ import RootView from "./RootView";
 
 export {
   AnimatedAppToast,
+  AnimatedListContainer,
   ApiComponent,
   AppAvatar,
   AppDivider,
